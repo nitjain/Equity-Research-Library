@@ -1,0 +1,510 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Shilpa Medicare Research Report - September 2026</title>
+  <style>
+    :root {
+      --bg: #f4f1e8;
+      --paper: #fffdf8;
+      --ink: #1e2930;
+      --muted: #5d6974;
+      --line: #ded6c8;
+      --accent: #176d6a;
+      --accent-dark: #0f5351;
+      --accent-soft: #dcefeb;
+      --gold: #9a6a12;
+      --gold-soft: #f7ecd2;
+      --green: #246b45;
+      --green-soft: #dfeee3;
+      --red: #9d3434;
+      --red-soft: #f5dddd;
+      --shadow: 0 18px 42px rgba(30, 41, 48, 0.12);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 12% 0%, rgba(23, 109, 106, 0.16), transparent 30rem),
+        radial-gradient(circle at 90% 10%, rgba(154, 106, 18, 0.12), transparent 24rem),
+        linear-gradient(135deg, #f7f1e2 0%, #eef4ef 48%, #f4f1e8 100%);
+      font-family: Georgia, "Times New Roman", serif;
+      line-height: 1.58;
+    }
+
+    a { color: var(--accent-dark); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .shell {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .hero { padding: 52px 0 28px; }
+
+    .eyebrow {
+      margin: 0 0 12px;
+      color: var(--accent-dark);
+      font-family: "Trebuchet MS", Verdana, sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    h1, h2, h3 { margin: 0; line-height: 1.15; }
+
+    h1 {
+      max-width: 960px;
+      font-size: clamp(2.35rem, 5.8vw, 4.8rem);
+      font-weight: 700;
+      letter-spacing: 0;
+    }
+
+    .subtitle {
+      max-width: 850px;
+      margin: 18px 0 0;
+      color: var(--muted);
+      font-size: 1.08rem;
+    }
+
+    .meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 24px;
+      font-family: "Trebuchet MS", Verdana, sans-serif;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 7px 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 253, 248, 0.78);
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 250px minmax(0, 1fr);
+      gap: 24px;
+      align-items: start;
+      padding-bottom: 56px;
+    }
+
+    nav {
+      position: sticky;
+      top: 16px;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 253, 248, 0.88);
+      box-shadow: var(--shadow);
+      font-family: "Trebuchet MS", Verdana, sans-serif;
+    }
+
+    nav strong {
+      display: block;
+      margin-bottom: 10px;
+      color: var(--ink);
+      font-size: 0.9rem;
+      text-transform: uppercase;
+    }
+
+    nav a {
+      display: block;
+      padding: 8px 0;
+      border-top: 1px solid rgba(222, 214, 200, 0.75);
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    main { display: grid; gap: 18px; }
+
+    section, .note {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 253, 248, 0.94);
+      box-shadow: var(--shadow);
+    }
+
+    section { padding: 24px; }
+
+    section h2 {
+      margin-bottom: 14px;
+      font-size: clamp(1.45rem, 3vw, 2.05rem);
+    }
+
+    section h3 {
+      margin: 20px 0 8px;
+      color: var(--accent-dark);
+      font-family: "Trebuchet MS", Verdana, sans-serif;
+      font-size: 1.02rem;
+      text-transform: uppercase;
+    }
+
+    p { margin: 0 0 12px; }
+    ul { margin: 10px 0 0; padding-left: 22px; }
+    li { margin: 7px 0; }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin: 16px 0 6px;
+    }
+
+    .metric {
+      min-height: 118px;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: linear-gradient(180deg, #ffffff 0%, #f6fbf8 100%);
+    }
+
+    .metric span {
+      display: block;
+      color: var(--muted);
+      font-family: "Trebuchet MS", Verdana, sans-serif;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+    }
+
+    .metric b {
+      display: block;
+      margin-top: 8px;
+      color: var(--accent-dark);
+      font-size: 1.85rem;
+      line-height: 1;
+    }
+
+    .metric small {
+      display: block;
+      margin-top: 8px;
+      color: var(--muted);
+      font-family: "Trebuchet MS", Verdana, sans-serif;
+      font-size: 0.82rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0 4px;
+      overflow: hidden;
+      border-radius: 8px;
+      font-family: "Trebuchet MS", Verdana, sans-serif;
+      font-size: 0.94rem;
+    }
+
+    th, td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: var(--accent-dark);
+      color: #fff;
+      font-weight: 700;
+    }
+
+    tr:nth-child(even) td { background: rgba(23, 109, 106, 0.045); }
+
+    .callout {
+      margin: 14px 0;
+      padding: 16px;
+      border-left: 5px solid var(--accent);
+      border-radius: 6px;
+      background: var(--accent-soft);
+    }
+
+    .good { border-left-color: var(--green); background: var(--green-soft); }
+    .warning { border-left-color: var(--gold); background: var(--gold-soft); }
+    .bad { border-left-color: var(--red); background: var(--red-soft); }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .mini-panel {
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fffdf8;
+    }
+
+    .mini-panel h3 { margin-top: 0; }
+
+    .note {
+      padding: 16px 20px;
+      color: var(--muted);
+      font-family: "Trebuchet MS", Verdana, sans-serif;
+      font-size: 0.9rem;
+    }
+
+    .sources li { word-break: break-word; }
+
+    @media (max-width: 900px) {
+      .layout { grid-template-columns: 1fr; }
+      nav { position: static; }
+      .card-grid, .two-col { grid-template-columns: 1fr 1fr; }
+      table { display: block; overflow-x: auto; white-space: nowrap; }
+    }
+
+    @media (max-width: 620px) {
+      .shell { width: min(100% - 20px, 1180px); }
+      .hero { padding-top: 32px; }
+      section { padding: 18px; }
+      .card-grid, .two-col { grid-template-columns: 1fr; }
+    }
+  </style>
+  <link rel="stylesheet" href="report-insights.css">
+  <script id="report-insights-data" type="application/json">{"snapshot":{"marketCap":"₹18,791 Cr","pe":"66.1x","peg":"0.56","roe":"9.0%","roce":"10.9%","quarterRating":"Excellent","quarterReason":"Revenue +45%; PAT +115%","quarterTone":"positive","pead":"Yes · Positive","peadNote":"+50.8% after results","peadTone":"positive"},"rating":72,"ratingLabel":"High growth, high expectations","mix":{"periods":["FY25","FY26","Q1 FY27"],"labels":["API / CDMO","Formulations","Biologics"],"values":[[57,35,8],[50,40,10],[47,42,11]],"note":"Vertical mix is shifting from APIs toward complex formulations and biologics."},"revenue":{"periods":["FY22","FY23","FY24","FY25","FY26"],"values":[1141,1046,1146,1281,1535],"cagr":"7.7%"},"ownership":{"periods":["FY22","FY23","FY24","FY25","FY26"],"labels":["Promoter","FII","DII","Public"],"values":[[50.01,14.41,1.93,33.65],[50.01,13.73,.54,35.72],[50.01,5.63,1.65,42.71],[44.23,10.97,7.55,37.25],[40.13,11.07,8.58,40.21]],"note":"March-end snapshots; promoter dilution was offset partly by institutional ownership."},"technical":{"points":"0,64.8 5.9,65.7 11.8,67 17.6,68.1 23.5,70 29.4,71.1 35.3,70.3 41.2,71.4 47.1,68.4 52.9,69.2 58.8,71.7 64.7,71.8 70.6,74.4 76.5,74.4 82.4,73.7 88.2,75.2 94.1,75 100,77 105.9,77.8 111.8,80 117.6,76.8 123.5,72.7 129.4,73.4 135.3,74.7 141.2,75.2 147.1,73.1 152.9,75 158.8,72.9 164.7,67.7 170.6,64.6 176.5,65.5 182.4,65.1 188.2,64.7 194.1,60.9 200,58.8 205.9,55.2 211.8,56.5 217.6,52.6 223.5,51.7 229.4,51.2 235.3,49.1 241.2,45.3 247.1,43.5 252.9,44.2 258.8,45.6 264.7,45.1 270.6,32.1 276.5,25.2 282.4,23.8 288.2,15.5 294.1,10 300,11.6","chartLow":"268","chartHigh":"956","oneMonth":"+14.7%","threeMonth":"+74.5%","oneYear":"+125.1%","high52":"₹964.15","fromHigh52":"2.5% below","ath":"₹964.15","fromAth":"2.5% below","rsi":"66.2","rsiLabel":"Strong momentum","rsiTone":"positive","dmaShort":"₹887.4 / ₹748.1","trend":"Price above both","dma200":"₹478.3","priceVs200":"97% above","calloutTone":"warning","read":"Bullish and near the available-series ATH with positive PEAD. Momentum is strong, but the near-doubling over the 200-day average makes valuation and event risk unusually important."}}</script>
+  <script src="report-insights-enhancements.js" defer></script>
+  <script src="report-insights.js" defer></script>
+</head>
+<body>
+  <header class="hero shell">
+    <p class="eyebrow">Equity Research Note</p>
+    <h1>Shilpa Medicare: Strong Quarter, Margin Quality, And Catalyst Map</h1>
+    <p class="subtitle">Fast analysis of Q1 FY27 performance, margin expansion, revenue mix, management commentary, sustainability, sector backdrop, and next 2-4 quarter projection.</p>
+    <div class="meta-row" aria-label="Report metadata">
+      <span class="pill">Company: Shilpa Medicare Ltd.</span>
+      <span class="pill">Report month: September 2026</span>
+      <span class="pill">Primary quarter: Q1 FY27 / Jun 2026</span>
+      <span class="pill">Status: Analytical note, not investment advice</span>
+    </div>
+  </header>
+
+  <div class="layout shell">
+    <nav aria-label="Report navigation">
+      <strong>Navigate</strong>
+      <a href="#executive-summary">Summary</a>
+      <a href="#quarter-snapshot">Quarter Snapshot</a>
+      <a href="#strong-quarter">Why The Quarter Was Strong</a>
+      <a href="#catalyst">Catalysts</a>
+      <a href="#margin-expansion">Margin Expansion</a>
+      <a href="#mix-change">Business And Revenue Mix</a>
+      <a href="#management">Management Commentary</a>
+      <a href="#sustainability">Sustainability</a>
+      <a href="#sector-outlook">Sector Outlook</a>
+      <a href="#projection">Projection</a>
+      <a href="#watchlist">Investor Watchlist</a>
+      <a href="#sources">Sources</a>
+    </nav>
+
+    <main>
+      <section id="executive-summary">
+        <h2>Summary</h2>
+        <div class="callout good">
+          <strong>Core view:</strong> Shilpa Medicare's Q1 FY27 was strong because growth is now broad-based across API/CDMO, formulations and biologics, while earlier heavy investments are beginning to monetise. The quarter looks operating-led, not one-off accounting-led.
+        </div>
+        <p>The company is shifting from a mainly API-led pharma business toward a differentiated platform built around complex formulations, specialty CDMO, peptides, oncology APIs, biologics, ADC capabilities and novel drug delivery systems.</p>
+        <p>The most important sustainability point: management explicitly said the current ~30% EBITDA margin is on the better side but they expect margins to remain in a similar range, preferring to be conservative and overdeliver.</p>
+      </section>
+
+      <section id="quarter-snapshot">
+        <h2>Quarter Snapshot</h2>
+        <div class="card-grid">
+          <div class="metric"><span>Revenue</span><b>₹466-469 Cr</b><small>About 43-45% YoY growth</small></div>
+          <div class="metric"><span>Operating Profit</span><b>₹136 Cr</b><small>Screener operating profit</small></div>
+          <div class="metric"><span>OPM / EBITDA Margin</span><b>29-30%</b><small>Best-in-class quarter</small></div>
+          <div class="metric"><span>PAT</span><b>₹101 Cr</b><small>About 115% YoY growth</small></div>
+        </div>
+        <table>
+          <thead><tr><th>Metric</th><th>Q1 FY27 / Jun 2026</th><th>Context</th></tr></thead>
+          <tbody>
+            <tr><td>Sales / revenue</td><td>₹466 Cr on Screener; ₹469 Cr in investor presentation</td><td>Up ~43-45% YoY</td></tr>
+            <tr><td>Operating profit</td><td>₹136 Cr</td><td>Up from ₹91 Cr in Jun 2025</td></tr>
+            <tr><td>OPM</td><td>29%</td><td>Expanded from 28% in Jun 2025 and sustained above recent quarters</td></tr>
+            <tr><td>EBITDA</td><td>₹139 Cr</td><td>Presentation says +42% YoY</td></tr>
+            <tr><td>Net profit</td><td>₹101 Cr</td><td>Up ~115% YoY from ₹47 Cr</td></tr>
+            <tr><td>Other income</td><td>₹9 Cr</td><td>Not the main driver of profit growth</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="strong-quarter">
+        <h2>Why The Quarter Was Strong</h2>
+        <ul>
+          <li><strong>Broad-based vertical performance:</strong> Management said improvement was visible across three key verticals: API, formulations and biologics.</li>
+          <li><strong>API/CDMO recovery:</strong> API division remains focused on CDMO, peptides and oncology. Specialty CDMO contributed meaningfully to API growth.</li>
+          <li><strong>Complex formulation pipeline:</strong> Products such as Rotigotine transdermal patch, Abraxane, Enzalutamide and Abiraterone are important near-term launch drivers.</li>
+          <li><strong>Biologics monetisation:</strong> Management says investments in biologics, CDMO, novel drug delivery and NBE are under monetisation.</li>
+          <li><strong>Operating leverage:</strong> The company said large reinvestment is mostly behind it and "the harvesting is ahead," meaning fixed assets and R&D capabilities are starting to support higher revenue and margin.</li>
+        </ul>
+      </section>
+
+      <section id="catalyst">
+        <h2>Catalysts</h2>
+        <table>
+          <thead><tr><th>Catalyst</th><th>What Changed</th><th>Why It Matters</th></tr></thead>
+          <tbody>
+            <tr><td>OERIS approval</td><td>SEC approved OERIS, extended-release Ondansetron injection; India launch planned after final CDSCO marketing authorisation</td><td>First-of-its-kind supportive oncology product with patent protection in India until 2039</td></tr>
+            <tr><td>Complex launches</td><td>Rotigotine patch approved in Europe and filed in the US; Abraxane, Enzalutamide and Abiraterone planned for FY28</td><td>Complex products have fewer generic competitors and better gross-margin potential</td></tr>
+            <tr><td>CDMO funnel</td><td>More than 25 CDMO programs discussed by management, including early-stage programs</td><td>Even partial commercial conversion can create a sizable multi-year business</td></tr>
+            <tr><td>Biologics platform</td><td>Aflibercept clinical studies completed; biologics CDMO programs in progress</td><td>Can add a higher-margin growth leg beyond small molecule APIs</td></tr>
+            <tr><td>Peptide capacity</td><td>Large peptide manufacturing capacity in India targeted for commissioning by end-FY27</td><td>Positions Shilpa for GLP-1 and peptide opportunity pools</td></tr>
+            <tr><td>Orion agreement</td><td>Shilpa Biologicals entered co-development and supply agreement with Orion Corporation, Finland</td><td>Shows external validation of biologics capabilities</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="margin-expansion">
+        <h2>Reason For Margin Expansion</h2>
+        <div class="two-col">
+          <div class="mini-panel">
+            <h3>Structural Drivers</h3>
+            <ul>
+              <li>Complex formulations with limited competition.</li>
+              <li>Higher CDMO and specialty contribution.</li>
+              <li>Biologics and NBE investments beginning to monetise.</li>
+              <li>Operating leverage from already-built manufacturing and R&D assets.</li>
+            </ul>
+          </div>
+          <div class="mini-panel">
+            <h3>Risks To Margin</h3>
+            <ul>
+              <li>Raw material price inflation from global political disruption.</li>
+              <li>Only partial pass-through of cost increases to customers.</li>
+              <li>Launch timing and regulatory approval timing.</li>
+              <li>US tariff and regulatory risks.</li>
+            </ul>
+          </div>
+        </div>
+        <p>Management linked gross margins to complex products: Rotigotine patch, Abraxane, Nor-UDCA and 505(b)(2) style differentiated products. They also acknowledged raw material pressure, with only partial pass-through possible.</p>
+      </section>
+
+      <section id="mix-change">
+        <h2>What Changed In Business And Revenue Mix</h2>
+        <table>
+          <thead><tr><th>Vertical</th><th>Q1 FY27 Revenue Contribution</th><th>Business Role</th></tr></thead>
+          <tbody>
+            <tr><td>API and others</td><td>~47%</td><td>Oncology, non-oncology, payloads/linkers, peptides, polymers, GLP-1 and CDMO</td></tr>
+            <tr><td>Formulations</td><td>~42%</td><td>Tablets/capsules, injectables, oral dissolving films, transdermal patches and formulation CDMO</td></tr>
+            <tr><td>Biologics</td><td>~11%</td><td>NBE, microbials, mammalian products, biologics CDMO and ADCs</td></tr>
+          </tbody>
+        </table>
+        <p>The change is qualitative as much as numerical: Shilpa is moving from selling ingredients toward developing first-in-class drugs, partnering with innovators, and manufacturing complex molecules. That mix usually deserves higher margins if execution is consistent.</p>
+      </section>
+
+      <section id="management">
+        <h2>What Management Is Saying</h2>
+        <ul>
+          <li>Management called Q1 FY27 the best quarter in the company's history.</li>
+          <li>They highlighted that three years ago the company was a debt-heavy API business; now net debt-to-EBITDA is around 1.3x, ROCE is double digit, and credit rating has improved to AA-.</li>
+          <li>They said big bets in biologics, CDMO, novel drug delivery and NBE are still under monetisation.</li>
+          <li>They said "the reinvesting is largely behind us" and "the harvesting is ahead." This is the core operating leverage claim.</li>
+          <li>On margins, management said the company has shown consistent performance around 30% and expects margins to remain in a similar range, while preferring to be conservative and overdeliver.</li>
+        </ul>
+      </section>
+
+      <section id="sustainability">
+        <h2>One-Off Or Sustainable?</h2>
+        <div class="two-col">
+          <div class="mini-panel">
+            <h3>Why It Can Sustain</h3>
+            <ul>
+              <li>Growth is spread across API, formulations and biologics.</li>
+              <li>CDMO funnel is broad, with more than 25 programs mentioned.</li>
+              <li>Complex launches can support premium margins.</li>
+              <li>Balance sheet leverage has improved materially.</li>
+            </ul>
+          </div>
+          <div class="mini-panel">
+            <h3>Why It May Not Fully Repeat</h3>
+            <ul>
+              <li>High-margin launches are timing-sensitive.</li>
+              <li>CDMO programs may take years to commercialise.</li>
+              <li>Regulatory setbacks can delay monetisation.</li>
+              <li>Recent FTF Pharma NCLT disclosure is a governance/financial risk to monitor.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="callout warning">
+          Base view: not a pure one-off, but 30% EBITDA margin should be tested across Q2 and Q3. If margins hold above 27% and revenue keeps compounding, the earnings reset becomes more credible.
+        </div>
+      </section>
+
+      <section id="sector-outlook">
+        <h2>Sector Outlook</h2>
+        <p>Shilpa operates in pharmaceuticals, specialty formulations, APIs, CDMO, biologics and oncology-linked platforms. The Indian pharma backdrop remains strong: India is a cost-efficient global manufacturer with export strength, while the domestic pharma market is expected to grow materially through 2030.</p>
+        <p>The more relevant sub-sector tailwind is <strong>complex pharma and CDMO</strong>. Global innovators are outsourcing development and manufacturing of difficult molecules, peptides, biologics and oncology-linked products. India can benefit where companies have regulatory credibility, technical capability and commercial reliability.</p>
+        <div class="callout bad">
+          Sector risks: USFDA observations, product recalls, pricing pressure, raw material volatility, US tariff uncertainty, high R&D spend, customer concentration and delayed approvals.
+        </div>
+      </section>
+
+      <section id="projection">
+        <h2>Projection If Management Walks The Talk</h2>
+        <p>Assumptions: revenue growth continues from complex launches and CDMO/biologics monetisation; EBITDA margin holds near 27-30%; other income does not drive the numbers; tax rate normalises over time.</p>
+        <table>
+          <thead><tr><th>Period</th><th>Revenue Estimate</th><th>Expected OPM</th><th>Expected EBITDA Margin</th><th>EBITDA / Operating Profit Estimate</th><th>PAT Estimate</th><th>Expected EPS</th></tr></thead>
+          <tbody>
+            <tr><td>Q2 FY27</td><td>₹470-500 Cr</td><td>27-30%</td><td>28-30%</td><td>₹130-150 Cr</td><td>₹85-105 Cr</td><td>₹4.35-5.37</td></tr>
+            <tr><td>Q3 FY27</td><td>₹490-530 Cr</td><td>27-30%</td><td>28-30%</td><td>₹135-160 Cr</td><td>₹90-110 Cr</td><td>₹4.60-5.63</td></tr>
+            <tr><td>Q4 FY27</td><td>₹510-560 Cr</td><td>27-30%</td><td>28-30%</td><td>₹140-170 Cr</td><td>₹95-120 Cr</td><td>₹4.86-6.14</td></tr>
+            <tr><td>Q1 FY28</td><td>₹525-585 Cr</td><td>27-30%</td><td>28-30%</td><td>₹145-175 Cr</td><td>₹100-125 Cr</td><td>₹5.12-6.39</td></tr>
+          </tbody>
+        </table>
+        <table>
+          <thead><tr><th>Next 4Q Run-Rate Case</th><th>Range</th></tr></thead>
+          <tbody>
+            <tr><td>Revenue</td><td>₹2,000-2,175 Cr</td></tr>
+            <tr><td>Expected OPM</td><td>27-30%</td></tr>
+            <tr><td>Expected EBITDA margin</td><td>28-30%</td></tr>
+            <tr><td>EBITDA / operating profit</td><td>₹550-655 Cr</td></tr>
+            <tr><td>PAT</td><td>₹370-460 Cr</td></tr>
+            <tr><td>Expected EPS</td><td>₹18.93-23.53</td></tr>
+            <tr><td>Conservative PAT case</td><td>₹300-360 Cr if margins normalise closer to 24-26%</td></tr>
+          </tbody>
+        </table>
+        <p><small>Expected EPS uses approximately 19.55 crore shares outstanding and assumes no material dilution.</small></p>
+      </section>
+
+      <section id="watchlist">
+        <h2>Investor Watchlist</h2>
+        <ul>
+          <li>Does revenue sustain above ₹470-500 Cr per quarter?</li>
+          <li>Does EBITDA margin hold above 27% without help from one-offs?</li>
+          <li>How quickly do Rotigotine, Abraxane, Enzalutamide and Abiraterone ramp?</li>
+          <li>Does OERIS receive final marketing authorisation and launch as planned?</li>
+          <li>Do CDMO programs move from early-stage work to commercial revenue?</li>
+          <li>Does biologics monetisation accelerate without major capex slippage?</li>
+          <li>What is the financial impact, if any, from FTF Pharma's NCLT process?</li>
+          <li>Are there any regulatory observations, product recalls or tariff hits in the US business?</li>
+        </ul>
+      </section>
+
+      <section id="sources">
+        <h2>Sources Used</h2>
+        <ul class="sources">
+          <li>Shilpa Medicare Q1 FY27 investor presentation filed with BSE.</li>
+          <li>Shilpa Medicare Q1 FY27 earnings conference call transcript filed with BSE.</li>
+          <li>Shilpa Medicare FY26 annual report filed with BSE.</li>
+          <li>Shilpa Medicare OERIS approval press release filed with BSE.</li>
+          <li>Shilpa Medicare FTF Pharma NCLT disclosure filed with BSE.</li>
+          <li>Screener consolidated financial snapshot for Shilpa Medicare.</li>
+          <li>IBEF Indian Pharmaceutical Industry and Medical Devices sector outlook references.</li>
+        </ul>
+      </section>
+
+      <div class="note">
+        This report is an analytical summary prepared on 12 September 2026. It is not a recommendation to buy, sell, or hold securities. Numbers are rounded for readability.
+      </div>
+    </main>
+  </div>
+</body>
+</html>

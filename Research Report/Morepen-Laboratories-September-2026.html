@@ -1,0 +1,600 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Morepen Laboratories Research Report - September 2026</title>
+  <style>
+    :root {
+      --bg: #f5f2ea;
+      --paper: #fffdf8;
+      --ink: #1f2933;
+      --muted: #5e6b78;
+      --line: #ded7c8;
+      --accent: #0f766e;
+      --accent-dark: #115e59;
+      --accent-soft: #d9eee9;
+      --warning: #a15c07;
+      --warning-soft: #faecd7;
+      --good: #256d45;
+      --good-soft: #dceee2;
+      --bad: #9b2c2c;
+      --bad-soft: #f6dddd;
+      --shadow: 0 18px 45px rgba(31, 41, 51, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(15, 118, 110, 0.14), transparent 34rem),
+        linear-gradient(135deg, #f7f0df 0%, #eef4ef 42%, #f5f2ea 100%);
+      font-family: Georgia, "Times New Roman", serif;
+      line-height: 1.58;
+    }
+
+    a {
+      color: var(--accent-dark);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .shell {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .hero {
+      padding: 52px 0 28px;
+    }
+
+    .eyebrow {
+      margin: 0 0 12px;
+      color: var(--accent-dark);
+      font-family: "Trebuchet MS", Verdana, sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin: 0;
+      line-height: 1.15;
+    }
+
+    h1 {
+      max-width: 920px;
+      font-size: clamp(2.4rem, 6vw, 5rem);
+      font-weight: 700;
+      letter-spacing: 0;
+    }
+
+    .subtitle {
+      max-width: 820px;
+      margin: 18px 0 0;
+      color: var(--muted);
+      font-size: 1.08rem;
+    }
+
+    .meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 24px;
+      font-family: "Trebuchet MS", Verdana, sans-serif;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 7px 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 253, 248, 0.78);
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 250px minmax(0, 1fr);
+      gap: 24px;
+      align-items: start;
+      padding-bottom: 56px;
+    }
+
+    nav {
+      position: sticky;
+      top: 16px;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 253, 248, 0.86);
+      box-shadow: var(--shadow);
+      font-family: "Trebuchet MS", Verdana, sans-serif;
+    }
+
+    nav strong {
+      display: block;
+      margin-bottom: 10px;
+      color: var(--ink);
+      font-size: 0.9rem;
+      text-transform: uppercase;
+    }
+
+    nav a {
+      display: block;
+      padding: 8px 0;
+      border-top: 1px solid rgba(222, 215, 200, 0.7);
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    main {
+      display: grid;
+      gap: 18px;
+    }
+
+    section,
+    .note {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 253, 248, 0.92);
+      box-shadow: var(--shadow);
+    }
+
+    section {
+      padding: 24px;
+    }
+
+    section h2 {
+      margin-bottom: 14px;
+      font-size: clamp(1.45rem, 3vw, 2.05rem);
+    }
+
+    section h3 {
+      margin: 20px 0 8px;
+      color: var(--accent-dark);
+      font-family: "Trebuchet MS", Verdana, sans-serif;
+      font-size: 1.02rem;
+      text-transform: uppercase;
+    }
+
+    p {
+      margin: 0 0 12px;
+    }
+
+    ul {
+      margin: 10px 0 0;
+      padding-left: 22px;
+    }
+
+    li {
+      margin: 7px 0;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin: 16px 0 6px;
+    }
+
+    .metric {
+      min-height: 118px;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: linear-gradient(180deg, #ffffff 0%, #f6fbf8 100%);
+    }
+
+    .metric span {
+      display: block;
+      color: var(--muted);
+      font-family: "Trebuchet MS", Verdana, sans-serif;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+    }
+
+    .metric b {
+      display: block;
+      margin-top: 8px;
+      color: var(--accent-dark);
+      font-size: 1.85rem;
+      line-height: 1;
+    }
+
+    .metric small {
+      display: block;
+      margin-top: 8px;
+      color: var(--muted);
+      font-family: "Trebuchet MS", Verdana, sans-serif;
+      font-size: 0.82rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0 4px;
+      overflow: hidden;
+      border-radius: 8px;
+      font-family: "Trebuchet MS", Verdana, sans-serif;
+      font-size: 0.94rem;
+    }
+
+    th,
+    td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: var(--accent-dark);
+      color: #fff;
+      font-weight: 700;
+    }
+
+    tr:nth-child(even) td {
+      background: rgba(15, 118, 110, 0.045);
+    }
+
+    .callout {
+      margin: 14px 0;
+      padding: 16px;
+      border-left: 5px solid var(--accent);
+      border-radius: 6px;
+      background: var(--accent-soft);
+    }
+
+    .warning {
+      border-left-color: var(--warning);
+      background: var(--warning-soft);
+    }
+
+    .good {
+      border-left-color: var(--good);
+      background: var(--good-soft);
+    }
+
+    .bad {
+      border-left-color: var(--bad);
+      background: var(--bad-soft);
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .mini-panel {
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fffdf8;
+    }
+
+    .mini-panel h3 {
+      margin-top: 0;
+    }
+
+    .note {
+      padding: 16px 20px;
+      color: var(--muted);
+      font-family: "Trebuchet MS", Verdana, sans-serif;
+      font-size: 0.9rem;
+    }
+
+    .sources li {
+      word-break: break-word;
+    }
+
+    @media (max-width: 900px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+
+      nav {
+        position: static;
+      }
+
+      .card-grid,
+      .two-col {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .shell {
+        width: min(100% - 20px, 1180px);
+      }
+
+      .hero {
+        padding-top: 32px;
+      }
+
+      section {
+        padding: 18px;
+      }
+
+      .card-grid,
+      .two-col {
+        grid-template-columns: 1fr;
+      }
+
+    }
+  </style>
+  <link rel="stylesheet" href="report-insights.css">
+  <script id="report-insights-data" type="application/json">{"snapshot":{"marketCap":"₹6,351 Cr","pe":"54.1x","peg":"2.00","roe":"5.3%","roce":"8.1%","quarterRating":"Excellent","quarterReason":"Revenue +34%; PAT +425%","quarterTone":"positive","pead":"Yes · Positive","peadNote":"+50.5% after results","peadTone":"positive"},"rating":68,"ratingLabel":"Strong catalyst, expensive","mix":{"periods":["FY24","FY25","Q1 FY27"],"labels":["API / CDMO","Devices","Formulations / other"],"values":[[57,27,16],[58,27,15],[65,24,11]],"note":"Directional vertical mix; Q1 includes ₹58 Cr of new commercial CDMO dispatches."},"revenue":{"periods":["FY22","FY23","FY24","FY25","FY26"],"values":[1547,1418,1690,1812,1806],"cagr":"4.0%"},"ownership":{"periods":["FY22","FY23","FY24","FY25","FY26"],"labels":["Promoter","FII","DII","Public"],"values":[[38.38,.96,1.07,59.59],[38.22,.96,2.93,57.88],[38.22,1.85,2.15,57.76],[35.66,1.94,1.67,60.72],[35.66,1.59,1.25,61.5]],"note":"March-end snapshots; public ownership remains above 60%."},"technical":{"points":"0,63.8 5.9,63.9 11.8,67.2 17.6,68 23.5,67.5 29.4,69 35.3,68.7 41.2,69.5 47.1,70.4 52.9,70.6 58.8,73.4 64.7,73.1 70.6,75.4 76.5,74.8 82.4,75 88.2,75.7 94.1,75.2 100,77.5 105.9,80 111.8,79.9 117.6,78.2 123.5,76.2 129.4,77.1 135.3,70.4 141.2,75.6 147.1,76 152.9,77.3 158.8,78.7 164.7,77.5 170.6,76.1 176.5,74.5 182.4,74.2 188.2,74.3 194.1,71 200,75 205.9,72.8 211.8,70.4 217.6,73.6 223.5,65.3 229.4,67.3 235.3,63.3 241.2,58 247.1,56.7 252.9,60.2 258.8,61.6 264.7,61.2 270.6,41 276.5,37.6 282.4,27.2 288.2,18.4 294.1,11.8 300,10","chartLow":"35.5","chartHigh":"115.8","oneMonth":"+50.6%","threeMonth":"+144.8%","oneYear":"+113.9%","high52":"₹118.88","fromHigh52":"2.6% below","ath":"₹163.20","fromAth":"29.1% below","rsi":"72.2","rsiLabel":"Overbought zone","rsiTone":"neutral","dmaShort":"₹104.3 / ₹80.2","trend":"Price above both","dma200":"₹51.7","priceVs200":"124% above","calloutTone":"warning","read":"Powerful bullish breakout and positive PEAD, but RSI above 70 and the large gap over the 200-day average raise near-term mean-reversion risk."}}</script>
+  <script src="report-insights-enhancements.js" defer></script>
+  <script src="report-insights.js" defer></script>
+</head>
+<body>
+  <header class="hero shell">
+    <p class="eyebrow">Equity Research Note</p>
+    <h1>Morepen Laboratories: Strong Quarter, Catalyst Check, And Sustainability View</h1>
+    <p class="subtitle">Analysis of Q1 FY27 performance, margin expansion, revenue mix, management commentary, sector outlook, and possible next 2-4 quarter trajectory.</p>
+    <div class="meta-row" aria-label="Report metadata">
+      <span class="pill">Company: Morepen Laboratories Ltd.</span>
+      <span class="pill">Report month: September 2026</span>
+      <span class="pill">Primary quarter: Q1 FY27 / Jun 2026</span>
+      <span class="pill">Status: Analytical note, not investment advice</span>
+    </div>
+  </header>
+
+  <div class="layout shell">
+    <nav aria-label="Report navigation">
+      <strong>Navigate</strong>
+      <a href="#executive-summary">Summary</a>
+      <a href="#quarter-snapshot">Quarter Snapshot</a>
+      <a href="#strong-quarter">Why The Quarter Was Strong</a>
+      <a href="#catalyst">Catalyst</a>
+      <a href="#margin-expansion">Margin Expansion</a>
+      <a href="#mix-change">Business And Revenue Mix</a>
+      <a href="#management">Management Commentary</a>
+      <a href="#sustainability">Sustainability</a>
+      <a href="#sector-outlook">Sector Outlook</a>
+      <a href="#projection">Projection</a>
+      <a href="#watchlist">Investor Watchlist</a>
+      <a href="#sources">Sources</a>
+    </nav>
+
+    <main>
+      <section id="executive-summary">
+        <h2>Summary</h2>
+        <div class="callout good">
+          <strong>Core view:</strong> The Q1 FY27 strength appears operating-led, not driven by other income. The main drivers were CDMO commercial dispatches, API recovery, export growth, better customer/product mix, and operating leverage.
+        </div>
+        <p>The important question is not whether the quarter was strong. It clearly was. The important question is whether Morepen has moved from a commodity API profile toward a more durable CDMO and innovation-led manufacturing profile.</p>
+        <p>My conclusion: <strong>partly structural, still requiring proof</strong>. The CDMO contract and capacity roadmap support sustainability, but investors should verify repeat dispatches and margins over the next two quarters before treating Q1 as the new normal.</p>
+      </section>
+
+      <section id="quarter-snapshot">
+        <h2>Quarter Snapshot</h2>
+        <div class="card-grid">
+          <div class="metric"><span>Revenue</span><b>₹575 Cr</b><small>Highest-ever quarterly revenue</small></div>
+          <div class="metric"><span>EBITDA</span><b>₹87.7 Cr</b><small>Up about 3x YoY</small></div>
+          <div class="metric"><span>EBITDA Margin</span><b>15.25%</b><small>Vs 6.65% in Q1 FY26</small></div>
+          <div class="metric"><span>PAT</span><b>₹56.35 Cr</b><small>Up about 394% YoY</small></div>
+        </div>
+        <table>
+          <thead>
+            <tr><th>Metric</th><th>Q1 FY27 / Jun 2026</th><th>Context</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Revenue</td><td>~₹575 Cr</td><td>~34% YoY growth</td></tr>
+            <tr><td>EBITDA</td><td>₹87.72 Cr</td><td>~207% YoY growth</td></tr>
+            <tr><td>EBITDA margin</td><td>15.25%</td><td>Meaningfully above recent historical run-rate</td></tr>
+            <tr><td>PAT</td><td>₹56.35 Cr</td><td>~394% YoY growth</td></tr>
+            <tr><td>Commercial CDMO dispatches</td><td>₹58 Cr</td><td>New strategic growth layer</td></tr>
+            <tr><td>Screener OPM</td><td>14%</td><td>Vs 6% in Jun 2025 and 5% in Mar 2026</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="strong-quarter">
+        <h2>Why The Quarter Was Strong</h2>
+        <ul>
+          <li><strong>CDMO moved into commercial supply:</strong> Q1 included about ₹58 Cr of commercial CDMO dispatches linked to the earlier announced global mandate.</li>
+          <li><strong>API recovery:</strong> Management presentation reported about 31% API growth and about 42% API export growth.</li>
+          <li><strong>Exports accelerated:</strong> Export revenue was reported up about 111%, reflecting better customer prioritisation and higher-value business.</li>
+          <li><strong>Medical devices remained a second engine:</strong> Devices growth was reported around 19%, with recurring consumables helping margin visibility.</li>
+          <li><strong>Operating leverage:</strong> Sales rose sharply while expenses did not rise proportionately, causing operating profit to expand sharply.</li>
+        </ul>
+        <div class="callout">
+          Other income was not the primary reason. Screener shows other income at only about ₹5 Cr in Jun 2026, while operating profit moved to about ₹83 Cr.
+        </div>
+      </section>
+
+      <section id="catalyst">
+        <h2>Catalyst</h2>
+        <p>The primary catalyst is the <strong>₹825 Cr global CDMO mandate entering commercial dispatches</strong>. This validates Morepen's attempt to move beyond transaction-led commodity API sales toward longer-duration manufacturing relationships.</p>
+        <table>
+          <thead>
+            <tr><th>Catalyst</th><th>Why It Matters</th><th>What To Track</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>₹825 Cr CDMO mandate</td><td>Creates potential recurring revenue and better margins</td><td>Quarterly CDMO dispatch value and repeat orders</td></tr>
+            <tr><td>Capacity expansion</td><td>Supports larger global programs</td><td>Ramp from ~535 KL to 600 KL, 800 KL, then 1,200 KL</td></tr>
+            <tr><td>Regulatory credibility</td><td>Needed for global pharma customer qualification</td><td>USFDA, EU-GMP, ANVISA and other inspection outcomes</td></tr>
+            <tr><td>New molecules</td><td>Reduces dependence on older commoditised APIs</td><td>Scale-up in gliptins, gliflozins, anticoagulants and specialty APIs</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="margin-expansion">
+        <h2>Reason For Margin Expansion</h2>
+        <div class="two-col">
+          <div class="mini-panel">
+            <h3>Structural Drivers</h3>
+            <ul>
+              <li>Higher CDMO contribution.</li>
+              <li>Better API product and customer mix.</li>
+              <li>Higher export contribution.</li>
+              <li>Higher utilisation of manufacturing assets.</li>
+            </ul>
+          </div>
+          <div class="mini-panel">
+            <h3>Quarter-Specific Boosters</h3>
+            <ul>
+              <li>Low Q1 FY26 margin base.</li>
+              <li>Commercial dispatch timing.</li>
+              <li>Sharper revenue growth than expense growth.</li>
+              <li>API profitability recovery after weaker quarters.</li>
+            </ul>
+          </div>
+        </div>
+        <p>The margin story is best understood as <strong>mix shift plus operating leverage</strong>, not merely cost control. EBITDA margin moved from 6.65% in Q1 FY26 to 15.25% in Q1 FY27.</p>
+      </section>
+
+      <section id="mix-change">
+        <h2>What Changed In Business And Revenue Mix</h2>
+        <table>
+          <thead>
+            <tr><th>Old Profile</th><th>Emerging Profile</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Commodity API business</td><td>Innovation-led manufacturing and CDMO</td></tr>
+            <tr><td>Transaction-based sales</td><td>Long-duration customer programs</td></tr>
+            <tr><td>Commodity pricing exposure</td><td>Higher-value customer prioritisation</td></tr>
+            <tr><td>Volatile earnings</td><td>Attempt at more predictable operating platform</td></tr>
+            <tr><td>Base API/formulation/device mix</td><td>API recovery plus CDMO plus chronic-care devices</td></tr>
+          </tbody>
+        </table>
+        <p>Annual report commentary also points to change inside APIs: Europe increased its share of API exports, API exports remained a major part of API revenue, and new molecules grew strongly. This indicates an effort to reduce dependence on older, price-sensitive molecules.</p>
+      </section>
+
+      <section id="management">
+        <h2>What Management Is Saying</h2>
+        <ul>
+          <li>Q1 FY27 was described as a quarter of <strong>commercial validation</strong> for the Morepen 2.0 strategy.</li>
+          <li>The company says CDMO has moved from development, validation and customer audit into commercial dispatches.</li>
+          <li>Near-term priorities are commercial CDMO supplies, API profitability recovery and capacity utilisation.</li>
+          <li>Medium-term priorities are capacity augmentation, new customer opportunities and operating leverage.</li>
+          <li>Long-term ambition is innovation-led manufacturing, global partnerships and sustainable value creation.</li>
+        </ul>
+        <div class="callout warning">
+          The language is ambitious. The validation will come from execution: repeat CDMO revenue, stable API realisations, clean regulatory outcomes, and sustained margins.
+        </div>
+      </section>
+
+      <section id="sustainability">
+        <h2>One-Off Or Sustainable?</h2>
+        <div class="two-col">
+          <div class="mini-panel">
+            <h3>Why It Can Sustain</h3>
+            <ul>
+              <li>CDMO mandate is multi-year, not a one-quarter order.</li>
+              <li>Capacity expansion gives room for larger programs.</li>
+              <li>Export and regulated-market mix are improving.</li>
+              <li>Medical devices have recurring consumables revenue.</li>
+            </ul>
+          </div>
+          <div class="mini-panel">
+            <h3>Why Caution Is Needed</h3>
+            <ul>
+              <li>CDMO dispatches can be lumpy.</li>
+              <li>API price erosion may return.</li>
+              <li>Regulated-market compliance risk remains high.</li>
+              <li>Customer concentration can rise in CDMO.</li>
+            </ul>
+          </div>
+        </div>
+        <p>Base case: the improvement is <strong>not purely one-off</strong>, but Q1 FY27 should not be fully annualised until Q2 and Q3 confirm the cadence. A practical sustainability threshold is EBITDA margin staying above 13% with CDMO dispatches continuing.</p>
+      </section>
+
+      <section id="sector-outlook">
+        <h2>Sector Outlook</h2>
+        <p>The sector backdrop is favorable. India remains a cost-efficient global pharma manufacturing base, with strong positions in generics, APIs and exports. IBEF notes India’s domestic pharma market around US$60 billion in FY26, with a path toward US$130 billion by 2030.</p>
+        <p>Medical devices are also in a strong growth cycle. IBEF estimates India’s medical devices market could grow from about US$15.2 billion in 2025 to about US$50.1 billion by 2030. Diagnostic equipment, chronic disease monitoring, insurance penetration and domestic manufacturing are key tailwinds.</p>
+        <div class="callout bad">
+          Sector risks remain meaningful: API price erosion, Chinese intermediate dependence, tariff changes, currency volatility, customer audits, and regulatory inspection outcomes.
+        </div>
+      </section>
+
+      <section id="projection">
+        <h2>Projection If Management Walks The Talk</h2>
+        <p>Assumptions: CDMO dispatches continue at ₹55-75 Cr per quarter, API recovery sustains, devices grow in the mid-to-high teens, EBITDA margin holds around 14-16%, and PAT margin stays near 9-10.5%.</p>
+        <table>
+          <thead>
+            <tr><th>Period</th><th>Revenue Estimate</th><th>Expected OPM</th><th>Expected EBITDA Margin</th><th>EBITDA Estimate</th><th>PAT Estimate</th><th>Expected EPS</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Q2 FY27</td><td>₹575-625 Cr</td><td>13-15%</td><td>14-16%</td><td>₹82-98 Cr</td><td>₹52-62 Cr</td><td>₹0.95-1.13</td></tr>
+            <tr><td>Q3 FY27</td><td>₹600-660 Cr</td><td>13-15%</td><td>14-16%</td><td>₹90-108 Cr</td><td>₹57-68 Cr</td><td>₹1.04-1.24</td></tr>
+            <tr><td>Q4 FY27</td><td>₹625-700 Cr</td><td>13-15%</td><td>14-17%</td><td>₹94-119 Cr</td><td>₹60-75 Cr</td><td>₹1.10-1.37</td></tr>
+            <tr><td>Q1 FY28</td><td>₹650-735 Cr</td><td>13-15%</td><td>14-17%</td><td>₹98-125 Cr</td><td>₹63-82 Cr</td><td>₹1.15-1.50</td></tr>
+          </tbody>
+        </table>
+        <table>
+          <thead>
+            <tr><th>Next 4Q Run-Rate Case</th><th>Range</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Revenue</td><td>₹2,450-2,720 Cr</td></tr>
+            <tr><td>Expected OPM</td><td>13-15%</td></tr>
+            <tr><td>Expected EBITDA margin</td><td>14-16%</td></tr>
+            <tr><td>EBITDA</td><td>₹365-450 Cr</td></tr>
+            <tr><td>PAT</td><td>₹230-285 Cr</td></tr>
+            <tr><td>Expected EPS</td><td>₹4.20-5.21</td></tr>
+            <tr><td>Conservative PAT case</td><td>₹175-220 Cr if EBITDA margin normalises to 12-13%</td></tr>
+          </tbody>
+        </table>
+        <p><small>Expected EPS uses approximately 54.7 crore shares outstanding and assumes no material dilution.</small></p>
+      </section>
+
+      <section id="watchlist">
+        <h2>Investor Watchlist</h2>
+        <ul>
+          <li>Does CDMO dispatch value repeat in Q2 and Q3?</li>
+          <li>Does EBITDA margin stay above 13%?</li>
+          <li>Are API exports and Europe mix continuing to rise?</li>
+          <li>Is working capital stable, especially receivables and inventory?</li>
+          <li>Does management announce new CDMO customers or only execute the existing mandate?</li>
+          <li>Are regulatory inspections clean?</li>
+          <li>Does medical-device growth remain broad-based, not only one product category?</li>
+        </ul>
+      </section>
+
+      <section id="sources">
+        <h2>Sources Used</h2>
+        <ul class="sources">
+          <li>Morepen Laboratories Q1 FY27 investor presentation, company investor center.</li>
+          <li>Morepen Laboratories Q1 FY27 BSE filings and financial results.</li>
+          <li>Morepen Laboratories FY26 annual report.</li>
+          <li>Screener consolidated financial snapshot for Morepen Laboratories.</li>
+          <li>IBEF Indian Pharmaceutical Industry outlook.</li>
+          <li>IBEF Medical Devices Industry in India outlook.</li>
+        </ul>
+      </section>
+
+      <div class="note">
+        This report is an analytical summary prepared on 12 September 2026. It is not a recommendation to buy, sell, or hold securities. Numbers are rounded for readability.
+      </div>
+    </main>
+  </div>
+</body>
+</html>
