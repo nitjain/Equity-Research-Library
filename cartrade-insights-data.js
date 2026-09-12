@@ -1,0 +1,37 @@
+window.reportInsightsData = {
+  snapshot: { marketCap: "₹14,980 Cr", pe: "62.9x", peg: "1.19", roe: "9.7%", roce: "11.8%", quarterRating: "Excellent", quarterReason: "Revenue +16%; OLX EBITDA +76%", quarterTone: "positive", pead: "Positive", peadNote: "Price near 52-week high", peadTone: "positive" },
+  rating: 75,
+  ratingLabel: "Platform strength; premium valuation",
+  mix: { periods: ["Q1 FY27"], labels: ["Consumer", "SAMIL", "OLX India"], values: [[37, 32, 31]], note: "Normalized Q1 platform revenue mix; reported platform revenue includes eliminations." },
+  revenue: { periods: ["FY22", "FY23", "FY24", "FY25", "FY26"], values: [313, 364, 490, 641, 779], pat: [-121, 40, 20, 145, 244], eps: [-28.33, 7.26, 3.05, 28.38, 46.58], ttm: { period: "TTM", revenue: 807, pat: 253, eps: 48.37 }, cagr: "26%", note: "Consolidated figures. FY22 included acquisition-related accounting effects." },
+  ownership: { periods: ["Jun25", "Sep25", "Dec25", "Mar26", "Jun26"], labels: ["FII", "DII", "Public"], values: [[67.3, 10.49, 22.21], [68.51, 9.95, 21.54], [64.58, 9.97, 25.45], [60.15, 12.07, 27.78], [54.37, 15.63, 30]], note: "CarTrade has no promoter category; quarter-end Screener snapshots." },
+  technical: { points: "0,41.3 17.6,40.1 35.3,19.2 52.9,10 70.6,26.5 88.2,31.2 105.9,34 123.5,63 141.2,79.1 158.8,76.5 176.5,76.6 194.1,70.4 211.8,64 229.4,28.8 247.1,28.6 264.7,24.1 282.4,13.5 300,10", chartLow: "1,623", chartHigh: "3,268", oneMonth: "+0.5%", threeMonth: "+20.7%", oneYear: "+26.9%", high52: "₹3,268", fromHigh52: "5.5% below", ath: "₹3,268", fromAth: "5.5% below", rsi: "81.1", rsiLabel: "Overbought", rsiTone: "neutral", dmaShort: "₹2,994 / ₹2,869", trend: "Price above both", dma200: "₹2,378", priceVs200: "30% above", calloutTone: "warn", read: "The trend remains strong, but an overbought RSI and 63x trailing P/E require continued OLX monetization and operating leverage." },
+  analysis: {
+    quarterStrength: { items: [{ title: "Broad platform growth", text: "Consolidated revenue rose 16% to ₹201.16 crore." }, { title: "OLX acceleration", text: "OLX India revenue grew 29% and EBITDA increased 76%." }, { title: "Consumer franchise", text: "CarWale and BikeWale revenue grew 18% through traffic and dealer monetization." }, { title: "Auction resilience", text: "SAMIL revenue increased 13%, adding a transaction-linked earnings engine." }], callout: "The result was operating-led across all three platforms. OLX delivered the strongest incremental operating leverage and is the main reason consolidated earnings quality improved." },
+    earningsDrivers: { structural: ["Marketplace liquidity and brand traffic support recurring monetization.", "Asset-light economics allow revenue growth to convert into cash.", "Three platforms diversify consumer, dealer and enterprise exposure.", "Surplus investments provide strategic and financial flexibility."], quarterSpecific: ["OLX paid monetization scaled faster than operating costs.", "Consumer Group maintained double-digit growth.", "SAMIL auction activity remained constructive.", "Finance income on surplus investments supported reported profit."], conclusion: "Underlying platform earnings improved, led by OLX operating leverage. Investors should separate operating profit from treasury income when assessing the durability of the 62.9x trailing P/E." },
+    catalysts: [{ name: "OLX monetization", evidence: "29% revenue and 76% EBITDA growth in Q1", impact: "Can become the largest source of incremental EBITDA." }, { name: "Dealer products", evidence: "CarWale and BikeWale ecosystem", impact: "Higher subscriptions and lead conversion deepen recurring revenue." }, { name: "Auction digitization", evidence: "SAMIL's phygital network", impact: "Formalization can expand volumes and buyer liquidity." }, { name: "Capital allocation", evidence: "₹910 crore investment portfolio", impact: "Buybacks, organic reinvestment or disciplined acquisitions can affect per-share value." }]
+  },
+  quarterProjection: {
+    assumptions: "Assumptions: OLX retains 20%+ growth with rising EBITDA conversion; Consumer Group and SAMIL grow in the low-to-mid teens; treasury income remains stable; and approximately 4.85 crore shares remain outstanding.",
+    periods: [{ period: "Q2 FY27", revenue: "₹205-220 Cr", opm: "29-32%", ebitdaMargin: "31-34%", ebitda: "₹64-75 Cr", pat: "₹58-68 Cr", eps: "₹12.0-14.0", variable: "OLX paid conversion" }, { period: "Q3 FY27", revenue: "₹215-235 Cr", opm: "30-33%", ebitdaMargin: "32-35%", ebitda: "₹69-82 Cr", pat: "₹62-74 Cr", eps: "₹12.8-15.3", variable: "Consumer traffic and SAMIL volumes" }, { period: "Q4 FY27", revenue: "₹225-245 Cr", opm: "30-34%", ebitdaMargin: "32-36%", ebitda: "₹72-88 Cr", pat: "₹65-79 Cr", eps: "₹13.4-16.3", variable: "Marketing discipline" }, { period: "Q1 FY28", revenue: "₹235-260 Cr", opm: "31-35%", ebitdaMargin: "33-37%", ebitda: "₹78-96 Cr", pat: "₹70-86 Cr", eps: "₹14.4-17.7", variable: "OLX engagement retention" }],
+    runRate: [{ label: "Revenue", value: "₹880-960 Cr" }, { label: "Expected OPM", value: "30-34%" }, { label: "Expected EBITDA margin", value: "32-36%" }, { label: "EBITDA", value: "₹283-341 Cr" }, { label: "PAT", value: "₹255-307 Cr" }, { label: "Expected EPS", value: "₹52.6-63.3" }],
+    note: "Expected EPS uses approximately 4.85 crore shares. PAT includes ordinary treasury income but assumes no acquisition gain or exceptional item."
+  },
+  coreView: "Consolidated Q1 revenue grew 16%, while OLX India accelerated to 29% revenue growth and 76% EBITDA growth. The portfolio now has several profitable engines and meaningful optionality in classifieds monetization.",
+  swot: {
+    strengths: ["Scaled automotive and classifieds brands", "Asset-light, cash-generative model", "Multiple profitable platform engines"],
+    weaknesses: ["Platform traffic can shift quickly", "Automotive and auction activity is cyclical", "Acquisition integration remains important"],
+    opportunities: ["OLX India monetization", "Dealer and enterprise digital spending", "Cross-platform data and product expansion"],
+    threats: ["Search and social platform competition", "Fraud or trust incidents", "Aggressive customer-acquisition spending"]
+  },
+  strategicPositioning: {
+    moat: { verdict: "Moderate", text: "Brand traffic, marketplace liquidity and dealer relationships create network effects, but users can multi-home across platforms." },
+    tailwinds: { verdict: "Favourable", text: "Used-vehicle formalization and digital dealer marketing expand the addressable market." },
+    management: { verdict: "Improving", text: "OLX operating leverage is strong; disciplined cash deployment and sustained engagement will define long-term quality." }
+  },
+  marketContext: {
+    customers: { names: ["Consumers", "Vehicle dealers", "Banks and NBFCs", "OEMs and enterprises"], text: "The portfolio serves both consumer and enterprise participants across discovery, auctions and classifieds." },
+    geography: { values: [{ label: "India", value: 100 }], period: "Q1 FY27", note: "The operating platforms assessed in this report are India-focused." },
+    governance: { level: "low", label: "Standard monitoring", text: "Monitor acquisition accounting, platform metrics, stock-based compensation and use of surplus cash." }
+  }
+};

@@ -1,0 +1,37 @@
+window.reportInsightsData = {
+  snapshot: { marketCap: "₹3,601 Cr", pe: "843x", peg: "N/M", roe: "-0.1%", roce: "4.9%", quarterRating: "Good", quarterReason: "Revenue +20%; PAT +55%", quarterTone: "positive", pead: "Yes · Positive", peadNote: "Recovery recognized by market", peadTone: "positive" },
+  rating: 62,
+  ratingLabel: "Recovery with leverage risk",
+  mix: { periods: ["Q1 FY27"], labels: ["Base APIs", "Ibuprofen"], values: [[80, 20]], note: "Q1 FY27 revenue mix; ibuprofen remained EBITDA-negative." },
+  revenue: { periods: ["FY22", "FY23", "FY24", "FY25", "FY26"], values: [1268, 1444, 1289, 1284, 1369], pat: [-58, -22, -567, 1, -7], eps: [-12.11, -4.62, -118.21, 0.15, -2.05], ttm: { period: "TTM", revenue: 1431, pat: -2, eps: -1.55 }, cagr: "-3.3%", note: "Consolidated figures. The current P/E is not economically meaningful because trailing profit is near break-even." },
+  ownership: { periods: ["Jun25", "Sep25", "Dec25", "Mar26", "Jun26"], labels: ["Promoter", "FII", "DII", "Public"], values: [[42.01, 14.25, 2.62, 41.12], [42.01, 13.58, 2.69, 41.72], [42, 11.98, 3.64, 42.38], [42, 11.59, 3.75, 42.66], [41.93, 11.52, 3.74, 42.81]], note: "Quarter-end Screener snapshots." },
+  technical: { points: "0,40.4 17.6,44.4 35.3,51.9 52.9,63.4 70.6,49.9 88.2,55.8 105.9,64.7 123.5,73.1 141.2,80 158.8,72.1 176.5,71.8 194.1,48.5 211.8,58.7 229.4,51.2 247.1,51 264.7,66.1 282.4,38.5 300,10", chartLow: "426", chartHigh: "749", oneMonth: "+21.4%", threeMonth: "+33.0%", oneYear: "+21.8%", high52: "₹749.15", fromHigh52: "At 52-week high", ath: "₹1,859.80", fromAth: "59.7% below", rsi: "66.5", rsiLabel: "Firm", rsiTone: "positive", dmaShort: "₹635 / ₹575", trend: "Price above both", dma200: "₹536", priceVs200: "40% above", calloutTone: "warn", read: "Price momentum confirms the earnings recovery, but valuation on near-break-even trailing profit is fragile and ibuprofen losses remain unresolved." },
+  analysis: {
+    quarterStrength: { items: [{ title: "Base APIs", text: "Revenue grew 24% to ₹307.7 crore at an EBITDA margin near 24%." }, { title: "Operating recovery", text: "Consolidated EBITDA reached ₹63.5 crore, the best result in eighteen quarters." }, { title: "Profit conversion", text: "PAT rose 55% to ₹16.3 crore as base-business growth outweighed the commodity drag." }, { title: "Deleveraging", text: "Improved operating cash generation reduced financial stress and supported the recovery." }], callout: "The improvement was driven by the higher-value base business. Commodity ibuprofen generated ₹76.5 crore revenue but remained EBITDA-negative at approximately -11.4%." },
+    earningsDrivers: { structural: ["Higher-value regulated-market API volumes.", "Improving utilization across the established manufacturing base.", "Product and customer diversification within base APIs.", "Lower leverage can reduce finance costs over time."], quarterSpecific: ["Base API revenue accelerated 24% year on year.", "West Asia logistics affected timing but not the recovery thesis.", "Ibuprofen losses continued to dilute consolidated margin.", "The comparison benefited from a weak prior-year earnings base."], conclusion: "The earnings reset is credible but incomplete. Sustainable improvement requires base margins near current levels, narrower ibuprofen losses and continued debt reduction." },
+    catalysts: [{ name: "Base API launches", evidence: "Regulated-market pipeline and customer qualifications", impact: "Can improve utilization and sustain higher-margin growth." }, { name: "Ibuprofen restructuring", evidence: "Q1 EBITDA margin remained -11.4%", impact: "Any break-even plan would materially improve consolidated earnings." }, { name: "Debt reduction", evidence: "FY26 CFO ₹153 crore against ₹687 crore borrowings", impact: "Lowers finance cost and equity risk." }, { name: "Plant utilization", evidence: "Best EBITDA in eighteen quarters", impact: "Further throughput can add operating leverage." }]
+  },
+  quarterProjection: {
+    assumptions: "Assumptions: base APIs retain double-digit growth and a low-to-mid-20s segment margin; ibuprofen losses narrow gradually; finance cost declines; and approximately 4.81 crore shares remain outstanding.",
+    periods: [{ period: "Q2 FY27", revenue: "₹365-400 Cr", opm: "15-17%", ebitdaMargin: "16-18%", ebitda: "₹58-72 Cr", pat: "₹12-20 Cr", eps: "₹2.5-4.2", variable: "Base mix and ibuprofen loss" }, { period: "Q3 FY27", revenue: "₹380-420 Cr", opm: "16-18%", ebitdaMargin: "17-19%", ebitda: "₹65-80 Cr", pat: "₹16-24 Cr", eps: "₹3.3-5.0", variable: "Customer launches and utilization" }, { period: "Q4 FY27", revenue: "₹390-435 Cr", opm: "16-19%", ebitdaMargin: "17-20%", ebitda: "₹66-87 Cr", pat: "₹18-28 Cr", eps: "₹3.7-5.8", variable: "Commodity pricing and debt" }, { period: "Q1 FY28", revenue: "₹410-460 Cr", opm: "17-19%", ebitdaMargin: "18-20%", ebitda: "₹74-92 Cr", pat: "₹22-32 Cr", eps: "₹4.6-6.7", variable: "Repeat base-business growth" }],
+    runRate: [{ label: "Revenue", value: "₹1,545-1,715 Cr" }, { label: "Expected OPM", value: "16-18%" }, { label: "Expected EBITDA margin", value: "17-19%" }, { label: "EBITDA", value: "₹263-331 Cr" }, { label: "PAT", value: "₹68-104 Cr" }, { label: "Expected EPS", value: "₹14.1-21.6" }],
+    note: "Expected EPS uses approximately 4.81 crore shares. Estimates are recovery scenarios, not management guidance."
+  },
+  coreView: "Q1 FY27 produced Solara's best EBITDA and PAT in eighteen quarters. Base-business growth and deleveraging are encouraging, but commodity ibuprofen remained loss-making and diluted the group's margin.",
+  swot: {
+    strengths: ["Regulated-market API platform", "Base-business EBITDA margin near 24%", "Improving leverage and finance-cost trajectory"],
+    weaknesses: ["Commodity ibuprofen remains loss-making", "Consolidated margin below base-business margin", "Working-capital and finance-cost burden"],
+    opportunities: ["Higher-value API launches", "Better plant utilization", "Customer and geography diversification"],
+    threats: ["Regulatory observations", "Persistent ibuprofen oversupply", "Raw-material, freight and currency volatility"]
+  },
+  strategicPositioning: {
+    moat: { verdict: "Moderate", text: "Regulatory filings, process chemistry and customer approvals create switching costs, although commodity exposure weakens pricing power." },
+    tailwinds: { verdict: "Selective", text: "Supply-chain diversification and demand for reliable regulated-market API partners support the base business." },
+    management: { verdict: "Recovering", text: "Deleveraging and the best profit in eighteen quarters are positive; decisive action on ibuprofen is still required." }
+  },
+  marketContext: {
+    customers: { names: [], text: "Customer identities are commercially sensitive and were not disclosed in the Q1 source." },
+    geography: { values: [{ label: "India", value: 48 }, { label: "Exports", value: 52 }], period: "FY26", note: "FY26 Business Responsibility and Sustainability Report disclosure; exports contributed 52% of total turnover across 64 countries." },
+    governance: { level: "medium", label: "Monitor", text: "Track regulatory compliance, leverage reduction and transparent separation of base and commodity economics." }
+  }
+};

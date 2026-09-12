@@ -1,0 +1,37 @@
+window.reportInsightsData = {
+  snapshot: { marketCap: "₹6,262 Cr", pe: "58.7x", peg: "1.96", roe: "21.8%", roce: "26.6%", quarterRating: "Excellent", quarterReason: "Revenue +13%; EBITDA +23%", quarterTone: "positive", pead: "Yes · Positive", peadNote: "+46% over three months", peadTone: "positive" },
+  rating: 77,
+  ratingLabel: "High quality; demanding valuation",
+  mix: { periods: ["Q1 FY27"], labels: ["Precision materials"], values: [[100]], note: "Product revenue percentages were not disclosed in the cited filing." },
+  revenue: { periods: ["FY22", "FY23", "FY24", "FY25", "FY26"], values: [324, 470, 509, 508, 571], pat: [55, 79, 84, 77, 96], eps: [9.57, 13.73, 14.63, 13.38, 16.64], ttm: { period: "TTM", revenue: 616, pat: 106, eps: 18.41 }, cagr: "23%", note: "Consolidated annual figures; TTM through the latest available quarter." },
+  ownership: { periods: ["Jun25", "Sep25", "Dec25", "Mar26", "Jun26"], labels: ["Promoter", "FII", "DII", "Public"], values: [[33.18, 3.14, 21, 42.68], [33.18, 3.03, 20.2, 43.59], [33.18, 2.59, 19.71, 44.52], [33.36, 1.73, 20, 44.91], [33.61, 2.04, 14.54, 49.81]], note: "Quarter-end Screener snapshots; the decline in DII holding warrants monitoring." },
+  technical: { points: "0,65.1 17.6,70.8 35.3,68.7 52.9,74.5 70.6,74.2 88.2,75.3 105.9,76 123.5,68.6 141.2,76.4 158.8,76.8 176.5,59.8 194.1,58.9 211.8,48.5 229.4,44.6 247.1,45.3 264.7,29 282.4,16.8 300,13.2", chartLow: "375", chartHigh: "1,156", oneMonth: "+9.7%", threeMonth: "+45.9%", oneYear: "+103.3%", high52: "₹1,155.90", fromHigh52: "6.0% below", ath: "₹1,155.90", fromAth: "6.0% below", rsi: "78.9", rsiLabel: "Overbought", rsiTone: "neutral", dmaShort: "₹1,059 / ₹897", trend: "Price above both", dma200: "₹618", priceVs200: "76% above", calloutTone: "warn", read: "Fundamental momentum is strong, but the stock is overbought and trades at a premium that leaves little room for program delays." },
+  analysis: {
+    quarterStrength: { items: [{ title: "Revenue growth", text: "Sales rose 12.95% to ₹131.81 crore across precision-material programs." }, { title: "Richer mix", text: "Gross profit increased 21.3%, materially faster than revenue." }, { title: "Margin expansion", text: "EBITDA grew 23.0% and margin expanded 225 basis points to 27.52%." }, { title: "Regional momentum", text: "India and Europe were strong, while Americas shunt demand began to recover." }], callout: "The quarter was strong because realization and product mix improved alongside volume. That is higher-quality growth than revenue expansion alone, although customer-program concentration remains relevant." },
+    earningsDrivers: { structural: ["Electron-beam welding and metallurgy support premium products.", "Long design-in and qualification cycles improve customer stickiness.", "EV, battery-storage and smart-meter adoption expand shunt demand.", "High ROCE supports internally funded capacity expansion."], quarterSpecific: ["Richer shunt-resistor mix lifted gross margin.", "Improved realizations outpaced input-cost growth.", "Europe grew strongly and Americas shunts improved.", "The comparison benefited from a lower Q1 FY26 margin base."], conclusion: "Margin expansion appears mix-led rather than accounting-led. Sustainability depends on program cadence, raw-material pass-through and conversion of accounting profit into cash." },
+    catalysts: [{ name: "EV and storage programs", evidence: "Higher current-measurement requirements", impact: "Can drive multi-year shunt-resistor volume." }, { name: "Smart-meter rollout", evidence: "Grid modernization and energy-management demand", impact: "Broadens the domestic precision-shunt opportunity." }, { name: "Americas recovery", evidence: "Shunt growth of about 30% year on year in Q1", impact: "Can restore an important export growth engine." }, { name: "Forward integration", evidence: "Precision components and assemblies strategy", impact: "Raises content per customer program if qualifications convert." }]
+  },
+  quarterProjection: {
+    assumptions: "Assumptions: shunt programs sustain double-digit growth; EBITDA margin remains within 26-28%; raw-material pass-through holds; and approximately 5.76 crore shares remain outstanding.",
+    periods: [{ period: "Q2 FY27", revenue: "₹135-145 Cr", opm: "25-27%", ebitdaMargin: "26-28%", ebitda: "₹35-41 Cr", pat: "₹23-28 Cr", eps: "₹4.0-4.9", variable: "Shunt mix and realizations" }, { period: "Q3 FY27", revenue: "₹145-155 Cr", opm: "25-27%", ebitdaMargin: "26-28%", ebitda: "₹38-43 Cr", pat: "₹25-30 Cr", eps: "₹4.3-5.2", variable: "Customer program ramps" }, { period: "Q4 FY27", revenue: "₹150-165 Cr", opm: "25-27%", ebitdaMargin: "26-28%", ebitda: "₹39-46 Cr", pat: "₹26-32 Cr", eps: "₹4.5-5.6", variable: "Exports and working capital" }, { period: "Q1 FY28", revenue: "₹155-175 Cr", opm: "25-27%", ebitdaMargin: "26-28%", ebitda: "₹40-49 Cr", pat: "₹27-34 Cr", eps: "₹4.7-5.9", variable: "Capacity and new programs" }],
+    runRate: [{ label: "Revenue", value: "₹585-640 Cr" }, { label: "Expected OPM", value: "25-27%" }, { label: "Expected EBITDA margin", value: "26-28%" }, { label: "EBITDA", value: "₹152-179 Cr" }, { label: "PAT", value: "₹101-124 Cr" }, { label: "Expected EPS", value: "₹17.5-21.5" }],
+    note: "Expected EPS uses approximately 5.76 crore shares. The ranges assume no major customer-program delay."
+  },
+  coreView: "Q1 FY27 combined 13% revenue growth with a 225-basis-point EBITDA-margin expansion. A richer mix and improved realizations demonstrate pricing and product quality, but the small scale makes program concentration important.",
+  swot: {
+    strengths: ["Specialized metallurgical processes", "High EBITDA margin", "Long design-in and qualification cycles"],
+    weaknesses: ["Modest revenue scale", "Customer-program concentration", "Dependence on specialized alloy inputs"],
+    opportunities: ["Smart-meter deployment", "EV battery-management adoption", "Higher electronic content in power systems"],
+    threats: ["Alternative sensing technologies", "Customer-program delays", "Raw-material and currency volatility"]
+  },
+  strategicPositioning: {
+    moat: { verdict: "Strong niche", text: "Electron-beam welding, material science and qualification history support attractive economics in a narrow precision-components market." },
+    tailwinds: { verdict: "Favourable", text: "Electrification, smart metering and battery monitoring increase demand for accurate current sensing." },
+    management: { verdict: "Disciplined", text: "Mix-led margin expansion is encouraging; capacity timing and customer diversification are the next evidence points." }
+  },
+  marketContext: {
+    customers: { names: [], text: "The company serves global OEM and component programs but does not disclose a complete customer list." },
+    geography: { values: [{ label: "India", value: 52.73 }, { label: "Outside India", value: 47.27 }], period: "FY26", note: "FY26 consolidated segment disclosure by customer location; calculated from ₹301.00 crore in India and ₹269.86 crore outside India." },
+    governance: { level: "low", label: "Standard monitoring", text: "Focus on customer concentration, related-party disclosures, capex returns and cash conversion." }
+  }
+};

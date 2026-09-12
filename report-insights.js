@@ -186,10 +186,11 @@
     if (!geography.values.length) {
       return `<article class="market-panel"><h3>Revenue by Geography</h3><div class="geography-unavailable" aria-hidden="true">Not disclosed</div><p>${geography.note}</p></article>`;
     }
+    const totalValue = geography.values.reduce((total, item) => total + item.value, 0);
     let cumulativeValue = 0;
     const gradientStops = geography.values.map((item, index) => {
       const start = cumulativeValue;
-      cumulativeValue += item.value;
+      cumulativeValue += (item.value / totalValue) * 100;
       return `${GEOGRAPHY_COLORS[index % GEOGRAPHY_COLORS.length]} ${start}% ${cumulativeValue}%`;
     }).join(", ");
     const legendItems = geography.values.map((item, index) => `<li><i style="background:${GEOGRAPHY_COLORS[index % GEOGRAPHY_COLORS.length]}"></i><span>${item.label}</span><b>${item.value}%</b></li>`).join("");
@@ -207,6 +208,50 @@
     section.className = "insights-compact market-context-section";
     section.innerHTML = `<h2>Customers, Geography &amp; Governance</h2><p class="section-intro">Disclosed commercial reach and relevant governance history. Undisclosed information is not inferred.</p><div class="market-context-grid">${customerPanel(data.marketContext.customers)}${geographyPanel(data.marketContext.geography)}${governancePanel(data.marketContext.governance)}</div>`;
     return section;
+  }
+
+  function createQuarterStrengthSection(analysis) {
+    const section = document.createElement("section");
+    section.id = "strong-quarter";
+    section.innerHTML = `<h2>Why The Previous Quarter Was Strong</h2><ul>${analysis.items.map((item) => `<li><strong>${item.title}:</strong> ${item.text}</li>`).join("")}</ul>${analysis.callout ? `<div class="callout">${analysis.callout}</div>` : ""}`;
+    return section;
+  }
+
+  function createEarningsDriversSection(analysis) {
+    const section = document.createElement("section");
+    section.id = "earnings-drivers";
+    const driverList = (items) => `<ul>${items.map((item) => `<li>${item}</li>`).join("")}</ul>`;
+    section.innerHTML = `<h2>Why Earnings Improved</h2><div class="two"><div class="panel"><h3>Structural Drivers</h3>${driverList(analysis.structural)}</div><div class="panel"><h3>Quarter-Specific Drivers</h3>${driverList(analysis.quarterSpecific)}</div></div><p>${analysis.conclusion}</p>`;
+    return section;
+  }
+
+  function createCatalystsSection(catalysts) {
+    const section = document.createElement("section");
+    section.id = "catalysts";
+    section.innerHTML = `<h2>Catalysts</h2><table><thead><tr><th>Catalyst</th><th>Evidence / Timing</th><th>Investment Read-through</th></tr></thead><tbody>${catalysts.map((item) => `<tr><td>${item.name}</td><td>${item.evidence}</td><td>${item.impact}</td></tr>`).join("")}</tbody></table>`;
+    return section;
+  }
+
+  function enhanceProjection(projection, main) {
+    const section = main.querySelector("#projection");
+    if (!section) return;
+    const rows = projection.periods.map((item) => `<tr><td>${item.period}</td><td>${item.revenue}</td><td>${item.opm}</td><td>${item.ebitdaMargin}</td><td>${item.ebitda}</td><td>${item.pat}</td><td>${item.eps}</td><td>${item.variable}</td></tr>`).join("");
+    const runRateRows = projection.runRate.map((item) => `<tr><td>${item.label}</td><td>${item.value}</td></tr>`).join("");
+    section.innerHTML = `<h2>Projection: Next 2-4 Quarters</h2><p>${projection.assumptions}</p><table><thead><tr><th>Period</th><th>Revenue Estimate</th><th>Expected OPM</th><th>Expected EBITDA Margin</th><th>EBITDA Estimate</th><th>PAT Estimate</th><th>Expected EPS</th><th>Key Variable</th></tr></thead><tbody>${rows}</tbody></table><table><thead><tr><th>Next 4Q Run-Rate Case</th><th>Range</th></tr></thead><tbody>${runRateRows}</tbody></table><p><small>${projection.note}</small></p>`;
+  }
+
+  function enhanceRecentNarrative(data, main) {
+    if (!data.analysis || !data.quarterProjection) return;
+    const snapshot = main.querySelector("#quarter-snapshot, #snapshot");
+    const business = main.querySelector("#business");
+    const growth = main.querySelector("#growth, #orders");
+    if (snapshot) snapshot.insertAdjacentElement("afterend", createQuarterStrengthSection(data.analysis.quarterStrength));
+    if (business) {
+      business.querySelector("h2").textContent = "Business Quality And Mix";
+      business.insertAdjacentElement("afterend", createEarningsDriversSection(data.analysis.earningsDrivers));
+    }
+    if (growth) growth.insertAdjacentElement("afterend", createCatalystsSection(data.analysis.catalysts));
+    enhanceProjection(data.quarterProjection, main);
   }
 
   function enhanceSummary(data, main) {
@@ -242,7 +287,7 @@
     const chartId = `price-fill-${document.title.replace(/\W/g, "").slice(0, 12)}`;
     const transformedPoints = technical.points.split(" ").map((point) => {
       const [x, y] = point.split(",").map(Number);
-      return `${45 + x * 1.7},${18 + y * 2}`;
+      return `${45 + x * 1.7},${18 + ((y - 10) / 70) * 180}`;
     }).join(" ");
     const lastPoint = transformedPoints.split(" ").at(-1).split(",");
     const areaPoints = `45,198 ${transformedPoints} 555,198`;
@@ -251,7 +296,28 @@
     const dates = ["Sep ’25", "Dec ’25", "Mar ’26", "Jun ’26", "Sep ’26"];
     const dateLabels = dates.map((label, index) => `<text x="${[45, 172.5, 300, 427.5, 555][index]}" y="224" text-anchor="${index === 0 ? "start" : index === 4 ? "end" : "middle"}">${label}</text>`).join("");
     section.innerHTML = `<h2>Technical Analysis</h2><div class="technical-grid"><figure class="technical-chart market-price-chart"><div class="chart-toolbar"><div><b>Adjusted close</b><span>1Y · Weekly samples</span></div><span class="chart-status">Market trend</span></div><svg viewBox="0 0 600 240" role="img" aria-label="One-year adjusted stock-price trend from September 2025 to September 2026"><defs><linearGradient id="${chartId}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0d6662" stop-opacity=".24"/><stop offset="1" stop-color="#0d6662" stop-opacity=".01"/></linearGradient></defs><g class="chart-gridlines">${verticalGrid}${horizontalGrid}</g><polyline class="price-area" points="${areaPoints}" fill="url(#${chartId})"/><polyline class="price-line" points="${transformedPoints}"/><circle class="last-price-dot" cx="${lastPoint[0]}" cy="${lastPoint[1]}" r="4"/><g class="chart-axis-labels">${dateLabels}<text x="45" y="13">High ₹${technical.chartHigh}</text><text x="555" y="213" text-anchor="end">Low ₹${technical.chartLow}</text></g></svg><figcaption class="technical-caption"><span>Approximate time axis</span><span>Through 11 Sep 2026</span></figcaption></figure><div class="technical-stats">${metric("1 month", technical.oneMonth, "Price return", signedTone(technical.oneMonth))}${metric("3 months", technical.threeMonth, "Price return", signedTone(technical.threeMonth))}${metric("1 year", technical.oneYear, "Price return", signedTone(technical.oneYear))}${metric("52-week high", technical.high52, technical.fromHigh52)}${metric("All-time high", technical.ath, technical.fromAth)}${metric("RSI (14)", technical.rsi, technical.rsiLabel, technical.rsiTone)}${metric("20 / 50 DMA", technical.dmaShort, technical.trend)}${metric("200 DMA", technical.dma200, technical.priceVs200)}</div></div><div class="callout ${technical.calloutTone}"><strong>Technical read:</strong> ${technical.read}</div><p class="method-note">Technical returns, adjusted-price highs, moving averages and RSI use Yahoo Finance daily data through 11 September 2026 or the nearest available session. Month labels are approximate because the stored sampled series does not include observation dates. ATH means the available Yahoo series. PEAD is price confirmation, not proof of earnings causality.</p>`;
+    const priceHigh = Number(technical.chartHigh.replace(/,/g, ""));
+    const priceLow = Number(technical.chartLow.replace(/,/g, ""));
+    const priceScale = [18, 63, 108, 153, 198].map((y, index) => {
+      const price = priceHigh - ((priceHigh - priceLow) * index) / 4;
+      return `<text x="39" y="${y + 4}" text-anchor="end">₹${Math.round(price).toLocaleString("en-IN")}</text>`;
+    }).join("");
+    const axisLabels = section.querySelector(".chart-axis-labels");
+    [...axisLabels.querySelectorAll("text")].slice(-2).forEach((label) => label.remove());
+    axisLabels.insertAdjacentHTML("afterbegin", priceScale);
+    section.querySelector("svg").setAttribute("aria-label", "One-year adjusted stock-price trend with rupee price scale");
+    section.querySelector(".technical-caption span").textContent = "Price scale · ₹";
     return section;
+  }
+
+  function normalizeQuarterSnapshotTitle() {
+    const heading = [...document.querySelectorAll("main h2")]
+      .find((item) => item.textContent.trim() === "Quarter Snapshot");
+    if (heading) heading.textContent = "Q1 FY27 Snapshot";
+
+    document.querySelectorAll('nav a[href="#quarter-snapshot"]').forEach((link) => {
+      if (link.textContent.trim() === "Quarter Snapshot") link.textContent = "Q1 FY27 Snapshot";
+    });
   }
 
   function addNavigation() {
@@ -260,11 +326,19 @@
     navigation.querySelectorAll("a").forEach((link) => {
       if (link.textContent.trim() === "Executive Summary") link.textContent = "Summary";
     });
-    navigation.insertAdjacentHTML("afterbegin", '<a href="#swot-analysis">SWOT Analysis</a>');
-    navigation.insertAdjacentHTML("afterbegin", '<a href="#strategic-positioning">Strategic Quality</a>');
-    navigation.insertAdjacentHTML("afterbegin", '<a href="#market-context">Customers &amp; Governance</a>');
-    navigation.insertAdjacentHTML("afterbegin", '<a href="#technical-analysis">Technical Analysis</a>');
-    navigation.insertAdjacentHTML("afterbegin", '<a href="#company-dashboard">Snapshot &amp; Charts</a>');
+    const optionalLinks = [
+      ["company-dashboard", "Snapshot &amp; Charts"],
+      ["technical-analysis", "Technical Analysis"],
+      ["catalysts", "Catalysts"],
+      ["earnings-drivers", "Earnings Drivers"],
+      ["strong-quarter", "Strong Quarter"],
+      ["market-context", "Customers &amp; Geography"],
+      ["strategic-positioning", "Strategic Quality"],
+      ["swot-analysis", "SWOT Analysis"]
+    ];
+    optionalLinks.forEach(([id, label]) => {
+      if (document.getElementById(id)) navigation.insertAdjacentHTML("afterbegin", `<a href="#${id}">${label}</a>`);
+    });
     navigation.insertAdjacentHTML("afterbegin", '<a class="reports-home" href="index.html">← All Reports</a>');
   }
 
@@ -274,14 +348,16 @@
     const main = document.querySelector("main");
     if (!data || !main) return;
     normalizeMetadata(data);
+    normalizeQuarterSnapshotTitle();
     removeExpectedEbitdaMargin();
     main.querySelectorAll("h2").forEach((heading) => {
       if (heading.textContent.trim() === "Executive Summary") heading.textContent = "Summary";
     });
+    enhanceRecentNarrative(data, main);
     enhanceSummary(data, main);
-    main.prepend(createDashboard(data));
+    if (data.snapshot && data.mix && data.revenue && data.ownership) main.prepend(createDashboard(data));
     const watchlist = main.querySelector("#watchlist, #watch");
-    main.insertBefore(createTechnicalSection(data), watchlist || main.lastElementChild);
+    if (data.technical) main.insertBefore(createTechnicalSection(data), watchlist || main.lastElementChild);
     addNavigation();
   }
 

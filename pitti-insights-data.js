@@ -1,0 +1,37 @@
+window.reportInsightsData = {
+  snapshot: { marketCap: "₹4,398 Cr", pe: "35.3x", peg: "N/M", roe: "12.5%", roce: "14.8%", quarterRating: "Good", quarterReason: "Revenue +15.9%; PAT +28.9%", quarterTone: "positive", pead: "Positive", peadNote: "Price at a 52-week high", peadTone: "positive" },
+  rating: 71,
+  ratingLabel: "Growth with balance-sheet load",
+  mix: { periods: ["Q1 FY27"], labels: ["Engineered components"], values: [[100]], note: "A consistent product-mix percentage was not disclosed in the source used." },
+  revenue: { periods: ["FY22", "FY23", "FY24", "FY25", "FY26"], values: [954, 1100, 1244, 1705, 1913], pat: [52, 59, 90, 122, 118], eps: [16.18, 18.36, 27.99, 32.48, 31.29], ttm: { period: "TTM", revenue: 1985, pat: 124, eps: 33.04 }, cagr: "30%", note: "Consolidated figures. Historical comparability reflects acquisitions and share-count changes." },
+  ownership: { periods: ["Jun25", "Sep25", "Dec25", "Mar26", "Jun26"], labels: ["Promoter", "FII", "DII", "Public / other"], values: [[54.17, 0.79, 19.15, 25.89], [54.17, 0.87, 20.53, 24.43], [54.17, 0.93, 20.23, 24.67], [54.17, 1.12, 20.23, 24.48], [54.17, 1.54, 20.1, 24.19]], note: "Quarter-end Screener snapshots." },
+  technical: { points: "0,34.5 17.6,49.4 35.3,48.1 52.9,55.8 70.6,67.7 88.2,77 105.9,71.5 123.5,51.6 141.2,71 158.8,76 176.5,49.2 194.1,51.1 211.8,46.2 229.4,39.2 247.1,44.6 264.7,45.2 282.4,28 300,10", chartLow: "684", chartHigh: "1,169", oneMonth: "+11.2%", threeMonth: "+15.9%", oneYear: "+15.9%", high52: "₹1,169.10", fromHigh52: "Near 52-week high", ath: "₹1,439.90", fromAth: "18.9% below", rsi: "70.0", rsiLabel: "Overbought threshold", rsiTone: "neutral", dmaShort: "₹1,101 / ₹1,009", trend: "Price above both", dma200: "₹901", priceVs200: "30% above", calloutTone: "warn", read: "The trend is positive and near a 52-week high, but the valuation needs cash conversion and acquisition returns to improve." },
+  analysis: {
+    quarterStrength: { items: [{ title: "Volume and value addition", text: "Revenue grew 15.9% to ₹529.1 crore as the integrated component platform scaled." }, { title: "Gross margin", text: "Gross margin remained near 39%, supporting the higher-value machining thesis." }, { title: "Adjusted earnings", text: "Adjusted EBITDA increased 13.6% and adjusted PAT rose about 25%." }, { title: "End-market breadth", text: "Rail, power, industrial motors and renewables supported diversified demand." }], callout: "Growth was operating-led, although adjusted EBITDA margin eased to 16.8% from 17.1%. Reported cash generation remains the key check on adjusted profit." },
+    earningsDrivers: { structural: ["Rising machining and assembly content per component.", "Customer qualifications create program longevity.", "Expanded and acquired capacity broadens the addressable market.", "End-market diversification reduces dependence on one industrial cycle."], quarterSpecific: ["Higher throughput supported fixed-cost absorption.", "Stable gross margin protected value addition.", "Adjusted PAT benefited from operating leverage.", "ESOP and integration items create a gap between adjusted and reported results."], conclusion: "Earnings improved mainly through scale and value addition, but the slight EBITDA-margin decline and ₹811 crore borrowing base make cash conversion more important than adjusted growth alone." },
+    catalysts: [{ name: "Machining share", evidence: "Integrated laminations-to-machining capability", impact: "Raises value added per tonne and margin resilience." }, { name: "Capacity utilization", evidence: "Organic and acquired facilities are ramping", impact: "Can improve asset turns after a heavy investment phase." }, { name: "Data-centre demand", evidence: "Power-generation components already supply US-linked programs", impact: "Adds a higher-growth application to the portfolio." }, { name: "Deleveraging", evidence: "FY26 CFO ₹205 crore", impact: "Sustained conversion can reduce the ₹811 crore debt load." }]
+  },
+  quarterProjection: {
+    assumptions: "Assumptions: mid-teens demand growth continues; adjusted EBITDA margin stays near 16.5-18%; machining content rises; integration costs remain controlled; and approximately 3.77 crore shares remain outstanding.",
+    periods: [{ period: "Q2 FY27", revenue: "₹520-550 Cr", opm: "15.5-16.5%", ebitdaMargin: "16.5-17.5%", ebitda: "₹86-96 Cr", pat: "₹29-35 Cr", eps: "₹7.7-9.3", variable: "Utilization and product mix" }, { period: "Q3 FY27", revenue: "₹545-585 Cr", opm: "16-17%", ebitdaMargin: "17-18%", ebitda: "₹93-105 Cr", pat: "₹32-39 Cr", eps: "₹8.5-10.3", variable: "Machining share" }, { period: "Q4 FY27", revenue: "₹560-610 Cr", opm: "16-17.5%", ebitdaMargin: "17-18.5%", ebitda: "₹95-113 Cr", pat: "₹34-43 Cr", eps: "₹9.0-11.4", variable: "Working capital and leverage" }, { period: "Q1 FY28", revenue: "₹600-650 Cr", opm: "16.5-17.5%", ebitdaMargin: "17.5-18.5%", ebitda: "₹105-120 Cr", pat: "₹39-48 Cr", eps: "₹10.3-12.7", variable: "New capacity contribution" }],
+    runRate: [{ label: "Revenue", value: "₹2,225-2,395 Cr" }, { label: "Expected OPM", value: "16-17%" }, { label: "Expected EBITDA margin", value: "17-18%" }, { label: "EBITDA", value: "₹379-434 Cr" }, { label: "PAT", value: "₹134-165 Cr" }, { label: "Expected EPS", value: "₹35.5-43.8" }],
+    note: "Expected EPS uses approximately 3.77 crore shares and assumes no material dilution. Adjusted estimates should be reconciled with reported results."
+  },
+  coreView: "Q1 growth remained healthy, with revenue up 15.9% and adjusted PAT up about 25%. Stable gross margin near 39% supports the value-addition thesis, though adjusted EBITDA margin softened slightly year on year.",
+  swot: {
+    strengths: ["Integrated laminations-to-machining process", "Long customer qualification cycles", "Exposure to diversified industrial end markets"],
+    weaknesses: ["Capital- and working-capital-intensive model", "Adjusted metrics exclude ESOP costs", "Acquisition integration adds complexity"],
+    opportunities: ["Higher machining content per component", "Rail, power and renewable investment", "Utilization of expanded capacity"],
+    threats: ["Customer-program delays", "Steel-price and currency volatility", "Debt and integration risk"]
+  },
+  strategicPositioning: {
+    moat: { verdict: "Moderate to strong", text: "Integrated manufacturing, precision capability and customer approvals make program replacement difficult once qualified." },
+    tailwinds: { verdict: "Favourable", text: "Efficiency investment in motors, rail, generation and renewables supports demand for precision electrical components." },
+    management: { verdict: "Growth oriented", text: "Historical margin expansion is positive; cash conversion and acquired-asset returns will determine execution quality." }
+  },
+  marketContext: {
+    customers: { names: [], text: "The presentation discusses established global relationships without supplying a complete customer list." },
+    geography: { values: [{ label: "Domestic", value: 73 }, { label: "Exports", value: 27 }], period: "FY26", note: "FY26 investor presentation; export revenue was ₹531 crore, representing 27% of total revenue across more than 11 countries." },
+    governance: { level: "medium", label: "Monitor", text: "Compare reported and adjusted profit, and track acquisition integration, leverage and related capital allocation." }
+  }
+};
