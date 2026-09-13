@@ -231,6 +231,16 @@ nav .reports-home {
   height: 145px;
 }
 
+.technical-empty {
+  display: grid;
+  min-height: 145px;
+  place-items: center;
+  border: 1px dashed var(--line);
+  border-radius: 6px;
+  color: var(--muted);
+  font: 0.8rem "Trebuchet MS", Verdana, sans-serif;
+}
+
 .technical-chart {
   margin: 0;
 }
