@@ -218,15 +218,17 @@
   function createQuarterStrengthSection(analysis) {
     const section = document.createElement("section");
     section.id = "strong-quarter";
-    section.innerHTML = `<h2>Why The Previous Quarter Was Strong</h2><ul>${analysis.items.map((item) => `<li><strong>${item.title}:</strong> ${item.text}</li>`).join("")}</ul>${analysis.callout ? `<div class="callout">${analysis.callout}</div>` : ""}`;
+    const heading = analysis.heading || "Why The Previous Quarter Was Strong";
+    section.innerHTML = `<h2>${heading}</h2><ul>${analysis.items.map((item) => `<li><strong>${item.title}:</strong> ${item.text}</li>`).join("")}</ul>${analysis.callout ? `<div class="callout">${analysis.callout}</div>` : ""}`;
     return section;
   }
 
   function createEarningsDriversSection(analysis) {
     const section = document.createElement("section");
     section.id = "earnings-drivers";
+    const heading = analysis.heading || "Why Earnings Improved";
     const driverList = (items) => `<ul>${items.map((item) => `<li>${item}</li>`).join("")}</ul>`;
-    section.innerHTML = `<h2>Why Earnings Improved</h2><div class="two"><div class="panel"><h3>Structural Drivers</h3>${driverList(analysis.structural)}</div><div class="panel"><h3>Quarter-Specific Drivers</h3>${driverList(analysis.quarterSpecific)}</div></div><p>${analysis.conclusion}</p>`;
+    section.innerHTML = `<h2>${heading}</h2><div class="two"><div class="panel"><h3>Structural Drivers</h3>${driverList(analysis.structural)}</div><div class="panel"><h3>Quarter-Specific Drivers</h3>${driverList(analysis.quarterSpecific)}</div></div><p>${analysis.conclusion}</p>`;
     return section;
   }
 
