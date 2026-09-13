@@ -58,8 +58,13 @@
     const explicitPrice = findMetadataValue(["current price:", "reference price:"]);
     if (explicitPrice) return explicitPrice;
     const high = Number(data.technical?.high52?.replace(/[^\d.]/g, ""));
-    const distance = Number(data.technical?.fromHigh52?.match(/[\d.]+/)?.[0]);
-    if (!Number.isFinite(high) || !Number.isFinite(distance)) return "Not available";
+    const position = data.technical?.fromHigh52?.trim() || "";
+    if (!Number.isFinite(high)) return "Not available";
+    if (/^(?:at|near) 52-week high$/i.test(position)) {
+      return `₹${high.toLocaleString("en-IN", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+    }
+    const distance = Number(position.match(/^([\d.]+)% below/i)?.[1]);
+    if (!Number.isFinite(distance)) return "Not available";
     const price = high * (1 - distance / 100);
     return `₹${price.toLocaleString("en-IN", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
   }
@@ -246,7 +251,8 @@
     if (Math.abs(change) < 0.05) return '<span class="valuation-upside neutral">0.0%</span>';
     const direction = change > 0 ? "upside" : "downside";
     const arrow = change > 0 ? "↑" : "↓";
-    return `<span class="valuation-upside ${direction}" aria-label="Potential ${direction} ${Math.abs(change).toFixed(1)} percent">${arrow} ${Math.abs(change).toFixed(1)}%</span>`;
+    const percentage = change.toFixed(1);
+    return `<span class="valuation-upside ${direction}" aria-label="Potential ${direction} ${percentage} percent">${arrow} ${percentage}%</span>`;
   }
 
   function enhanceValuation(valuation, main, currentPrice) {
@@ -356,24 +362,53 @@
   function addNavigation() {
     const navigation = document.querySelector("nav");
     if (!navigation) return;
-    navigation.querySelectorAll("a").forEach((link) => {
-      if (link.textContent.trim() === "Executive Summary") link.textContent = "Summary";
+    const labels = {
+      "company-dashboard": "Snapshot & Charts",
+      "executive-summary": "Summary",
+      summary: "Summary",
+      "quarter-snapshot": "Q1 FY27",
+      snapshot: "Quarter Snapshot",
+      "swot-analysis": "SWOT Analysis",
+      "strategic-positioning": "Strategic Quality",
+      "market-context": "Customers & Geography",
+      "strong-quarter": "Quarter Review",
+      business: "Business",
+      "earnings-drivers": "Earnings Drivers",
+      growth: "Growth",
+      drivers: "Growth Drivers",
+      catalysts: "Catalysts",
+      catalyst: "Catalysts",
+      capex: "Capex & Catalysts",
+      fiber: "Fiber Optionality",
+      deal: "Transformation",
+      guidance: "Guidance",
+      management: "Management",
+      quality: "Financial Quality",
+      "financial-quality": "Financial Quality",
+      valuation: "Valuation",
+      risks: "Risks",
+      projection: "Projection",
+      "technical-analysis": "Technical Analysis",
+      watch: "Watchlist",
+      watchlist: "Watchlist",
+      sources: "Sources",
+      "margin-expansion": "Margin Expansion",
+      "mix-change": "Mix Change",
+      sustainability: "Sustainability",
+      "sector-outlook": "Sector Outlook",
+      orders: "Orders & Outlook"
+    };
+    const links = [...document.querySelectorAll("main > section[id]")].map((section) => {
+      const link = document.createElement("a");
+      link.href = `#${section.id}`;
+      link.textContent = labels[section.id] || section.querySelector("h2")?.textContent.trim() || section.id;
+      return link;
     });
-    const optionalLinks = [
-      ["company-dashboard", "Snapshot &amp; Charts"],
-      ["technical-analysis", "Technical Analysis"],
-      ["valuation", "Valuation"],
-      ["catalysts", "Catalysts"],
-      ["earnings-drivers", "Earnings Drivers"],
-      ["strong-quarter", "Strong Quarter"],
-      ["market-context", "Customers &amp; Geography"],
-      ["strategic-positioning", "Strategic Quality"],
-      ["swot-analysis", "SWOT Analysis"]
-    ];
-    optionalLinks.forEach(([id, label]) => {
-      if (document.getElementById(id)) navigation.insertAdjacentHTML("afterbegin", `<a href="#${id}">${label}</a>`);
-    });
-    navigation.insertAdjacentHTML("afterbegin", '<a class="reports-home" href="index.html">← All Reports</a>');
+    const home = document.createElement("a");
+    home.className = "reports-home";
+    home.href = "index.html";
+    home.textContent = "← All Reports";
+    navigation.replaceChildren(home, ...links);
   }
 
   function render() {

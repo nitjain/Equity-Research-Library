@@ -46,6 +46,8 @@ heading; change the strength and earnings headings to reflect the evidence.
 ## Evidence And Dates
 
 * Set an explicit information cut-off and report date
+* Store an explicit current price and price date in structured report data; use the
+  same price for metadata and potential-upside calculations
 * Prefer exchange filings, company results, investor presentations, transcripts,
   and annual reports over aggregators
 * Use aggregators only for cross-checking market, historical, or ownership data
@@ -119,7 +121,7 @@ Apply these calculations:
 * Potential upside equals projected stock price divided by current price, minus one
 * Display PAT in ₹ crore, EPS to two decimals, and stock price to the nearest rupee
 * Display positive potential upside with a green up arrow and negative potential
-  upside with a red down arrow
+  upside with a red down arrow and minus sign
 * Bear, Base, and Bull assumptions must increase coherently within each year
 * Multiples should mature across forecast years unless a documented rerating case
   supports a different path
@@ -172,6 +174,8 @@ renamed equivalents.
 ## Presentation And Accessibility
 
 * Preserve the shared visual design and navigation
+* Build navigation from the rendered section order, with exactly one link per
+  section and no duplicate targets
 * Version report data and shared renderer script URLs whenever their output contract
   or displayed content changes; update every report to the same renderer version
 * Use semantic headings and tables with complete headers
