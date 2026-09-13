@@ -5,7 +5,7 @@
   const GEOGRAPHY_COLORS = ["#0d6662", "#56a89d", "#96c9c2", "#d19a32", "#7a6da8", "#aab8b5"];
 
   function prioritizeSharedStyles() {
-    const stylesheet = document.querySelector('link[href="report-insights.css"]');
+    const stylesheet = document.querySelector('link[href^="report-insights.css"]');
     if (stylesheet) document.head.append(stylesheet);
   }
 
@@ -232,17 +232,35 @@
     return section;
   }
 
-  function enhanceValuation(valuation, main) {
+  function parseDisplayNumber(value) {
+    const match = String(value).replace(/,/g, "").match(/-?\d+(?:\.\d+)?/);
+    const number = match ? Number(match[0]) : Number.NaN;
+    return Number.isFinite(number) ? number : null;
+  }
+
+  function formatPotentialUpside(targetPrice, currentPrice) {
+    const target = parseDisplayNumber(targetPrice);
+    const current = parseDisplayNumber(currentPrice);
+    if (target === null || current === null || current <= 0) return '<span class="valuation-upside neutral">N/A</span>';
+    const change = ((target / current) - 1) * 100;
+    if (Math.abs(change) < 0.05) return '<span class="valuation-upside neutral">0.0%</span>';
+    const direction = change > 0 ? "upside" : "downside";
+    const arrow = change > 0 ? "↑" : "↓";
+    return `<span class="valuation-upside ${direction}" aria-label="Potential ${direction} ${Math.abs(change).toFixed(1)} percent">${arrow} ${Math.abs(change).toFixed(1)}%</span>`;
+  }
+
+  function enhanceValuation(valuation, main, currentPrice) {
     let section = main.querySelector("#valuation");
     if (!section) {
       section = document.createElement("section");
       section.id = "valuation";
       const risks = main.querySelector("#risks");
-      main.insertBefore(section, risks || main.lastElementChild);
+      const projection = main.querySelector("#projection");
+      main.insertBefore(section, projection || risks || main.lastElementChild);
     }
     const tables = valuation.years.map((year) => {
-      const rows = year.scenarios.map((item) => `<tr><td>${item.scenario}</td><td>${item.revenue}</td><td>${item.patMargin}</td><td>${item.pat}</td><td>${item.eps}</td><td>${item.multiple}</td><td>${item.price}</td><td>${item.remarks}</td></tr>`).join("");
-      return `<h3>${year.period} Scenario Valuation</h3><table><thead><tr><th>Scenario</th><th>${year.period.replace("E", "")} revenue</th><th>PAT margin</th><th>Expected PAT</th><th>Expected EPS</th><th>Assigned P/E</th><th>Projected Stock Price</th><th>Remarks</th></tr></thead><tbody>${rows}</tbody></table>`;
+      const rows = year.scenarios.map((item) => `<tr><td>${item.scenario}</td><td>${item.revenue}</td><td>${item.patMargin}</td><td>${item.pat}</td><td>${item.eps}</td><td>${item.multiple}</td><td>${item.price}</td><td>${formatPotentialUpside(item.price, currentPrice)}</td><td>${item.remarks}</td></tr>`).join("");
+      return `<h3>${year.period} Scenario Valuation</h3><table><thead><tr><th>Scenario</th><th>${year.period.replace("E", "")} revenue</th><th>PAT margin</th><th>Expected PAT</th><th>Expected EPS</th><th>Assigned P/E</th><th>Projected Stock Price</th><th>Potential upside %</th><th>Remarks</th></tr></thead><tbody>${rows}</tbody></table>`;
     }).join("");
     section.innerHTML = `<h2>Valuation</h2><p><strong>Primary model:</strong> ${valuation.model}. ${valuation.rationale}</p>${tables}<div class="callout warn">${valuation.note}</div>`;
   }
@@ -344,6 +362,7 @@
     const optionalLinks = [
       ["company-dashboard", "Snapshot &amp; Charts"],
       ["technical-analysis", "Technical Analysis"],
+      ["valuation", "Valuation"],
       ["catalysts", "Catalysts"],
       ["earnings-drivers", "Earnings Drivers"],
       ["strong-quarter", "Strong Quarter"],
@@ -368,7 +387,7 @@
     main.querySelectorAll("h2").forEach((heading) => {
       if (heading.textContent.trim() === "Executive Summary") heading.textContent = "Summary";
     });
-    if (data.valuation) enhanceValuation(data.valuation, main);
+    if (data.valuation) enhanceValuation(data.valuation, main, getCurrentPrice(data));
     enhanceRecentNarrative(data, main);
     enhanceSummary(data, main);
     if (data.snapshot && data.mix && data.revenue && data.ownership) main.prepend(createDashboard(data));

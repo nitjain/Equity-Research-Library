@@ -17,6 +17,16 @@ window.reportInsightsData = {
     runRate: [{ label: "Revenue", value: "₹1,545-1,715 Cr" }, { label: "Expected OPM", value: "16-18%" }, { label: "Expected EBITDA margin", value: "17-19%" }, { label: "EBITDA", value: "₹263-331 Cr" }, { label: "PAT", value: "₹68-104 Cr" }, { label: "Expected EPS", value: "₹14.1-21.6" }],
     note: "Expected EPS uses approximately 4.81 crore shares. Estimates are recovery scenarios, not management guidance."
   },
+  valuation: {
+    model: "Risk-adjusted normalized forward P/E",
+    rationale: "This model fits an API turnaround where trailing P/E is not meaningful. Approximately 4.81 crore shares are used; earnings normalize ibuprofen losses and finance costs, while EV/EBITDA and debt reduction cross-check the equity value.",
+    years: [
+      { period: "FY27E", scenarios: [{ scenario: "Bear", revenue: "₹1,450 Cr", patMargin: "3.5%", pat: "₹51 Cr", eps: "₹10.60", multiple: "28x", price: "₹297", remarks: "Ibuprofen losses and finance costs keep the recovery shallow." }, { scenario: "Base", revenue: "₹1,550 Cr", patMargin: "5.5%", pat: "₹85 Cr", eps: "₹17.67", multiple: "38x", price: "₹671", remarks: "Base APIs sustain growth as commodity losses narrow gradually." }, { scenario: "Bull", revenue: "₹1,650 Cr", patMargin: "7.5%", pat: "₹124 Cr", eps: "₹25.78", multiple: "48x", price: "₹1,237", remarks: "Higher-value launches and faster deleveraging lift conversion." }] },
+      { period: "FY28E", scenarios: [{ scenario: "Bear", revenue: "₹1,600 Cr", patMargin: "5.0%", pat: "₹80 Cr", eps: "₹16.63", multiple: "26x", price: "₹432", remarks: "Base growth slows before commodity operations reach break-even." }, { scenario: "Base", revenue: "₹1,800 Cr", patMargin: "7.5%", pat: "₹135 Cr", eps: "₹28.07", multiple: "36x", price: "₹1,011", remarks: "Utilization improves and lower debt supports normalized earnings." }, { scenario: "Bull", revenue: "₹2,050 Cr", patMargin: "10.0%", pat: "₹205 Cr", eps: "₹42.62", multiple: "46x", price: "₹1,961", remarks: "Regulated launches and ibuprofen restructuring outperform." }] },
+      { period: "FY29E", scenarios: [{ scenario: "Bear", revenue: "₹1,750 Cr", patMargin: "6.0%", pat: "₹105 Cr", eps: "₹21.83", multiple: "24x", price: "₹524", remarks: "Turnaround progress plateaus with leverage still material." }, { scenario: "Base", revenue: "₹2,050 Cr", patMargin: "9.0%", pat: "₹185 Cr", eps: "₹38.46", multiple: "34x", price: "₹1,308", remarks: "A healthier API mix and debt reduction restore returns." }, { scenario: "Bull", revenue: "₹2,400 Cr", patMargin: "12.0%", pat: "₹288 Cr", eps: "₹59.88", multiple: "44x", price: "₹2,635", remarks: "A sustained product upgrade completes the turnaround." }] }
+    ],
+    note: "These are analytical valuation scenarios, not management guidance or price targets. Multiples decline across years. Turnaround execution, ₹687 crore FY26 borrowings, finance costs, regulatory launches and loss-making ibuprofen remain material caveats."
+  },
   coreView: "Q1 FY27 produced Solara's best EBITDA and PAT in eighteen quarters. Base-business growth and deleveraging are encouraging, but commodity ibuprofen remained loss-making and diluted the group's margin.",
   swot: {
     strengths: ["Regulated-market API platform", "Base-business EBITDA margin near 24%", "Improving leverage and finance-cost trajectory"],

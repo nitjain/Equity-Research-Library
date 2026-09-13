@@ -46,6 +46,16 @@ window.reportInsightsData = {
     ],
     note: "Expected EPS uses approximately 26.4 crore shares and excludes Q1 FY27's ₹548 crore exceptional gain. These are analytical estimates, not company guidance."
   },
+  valuation: {
+    model: "Normalized mid-cycle forward P/E",
+    rationale: "This model fits a global pipe manufacturer with project-cycle volatility and substantial order visibility. Approximately 26.4 crore shares are used; Q1's ₹548 crore exceptional gain is excluded and normalized PAT is cross-checked against mid-cycle EBITDA and order conversion.",
+    years: [
+      { period: "FY27E", scenarios: [{ scenario: "Bear", revenue: "₹17,000 Cr", patMargin: "8.5%", pat: "₹1,445 Cr", eps: "₹54.73", multiple: "22x", price: "₹1,204", remarks: "Order timing and steel spreads normalize below the Q1 run rate." }, { scenario: "Base", revenue: "₹18,000 Cr", patMargin: "10.0%", pat: "₹1,800 Cr", eps: "₹68.18", multiple: "28x", price: "₹1,909", remarks: "Global backlog converts with normalized earnings excluding the gain." }, { scenario: "Bull", revenue: "₹19,000 Cr", patMargin: "11.5%", pat: "₹2,185 Cr", eps: "₹82.77", multiple: "34x", price: "₹2,814", remarks: "US and Saudi execution preserve a premium project mix." }] },
+      { period: "FY28E", scenarios: [{ scenario: "Bear", revenue: "₹18,000 Cr", patMargin: "8.5%", pat: "₹1,530 Cr", eps: "₹57.95", multiple: "20x", price: "₹1,159", remarks: "Backlog replenishment and newer businesses underperform." }, { scenario: "Base", revenue: "₹20,000 Cr", patMargin: "10.5%", pat: "₹2,100 Cr", eps: "₹79.55", multiple: "26x", price: "₹2,068", remarks: "Line pipe and ductile-iron capacity sustain mid-cycle returns." }, { scenario: "Bull", revenue: "₹22,500 Cr", patMargin: "12.0%", pat: "₹2,700 Cr", eps: "₹102.27", multiple: "32x", price: "₹3,273", remarks: "Energy and water projects drive high utilization globally." }] },
+      { period: "FY29E", scenarios: [{ scenario: "Bear", revenue: "₹19,000 Cr", patMargin: "8.5%", pat: "₹1,615 Cr", eps: "₹61.17", multiple: "18x", price: "₹1,101", remarks: "Project deferrals and portfolio complexity compress returns." }, { scenario: "Base", revenue: "₹22,500 Cr", patMargin: "11.0%", pat: "₹2,475 Cr", eps: "₹93.75", multiple: "24x", price: "₹2,250", remarks: "A diversified pipe platform compounds at mid-cycle economics." }, { scenario: "Bull", revenue: "₹26,000 Cr", patMargin: "13.0%", pat: "₹3,380 Cr", eps: "₹128.03", multiple: "30x", price: "₹3,841", remarks: "Global infrastructure demand and mix outperform sustainably." }] }
+    ],
+    note: "These are analytical valuation scenarios, not management guidance or price targets. Multiples decline across years. The ₹548 crore exceptional gain is excluded; order deferrals, steel and freight volatility, Saudi/US execution and capital allocation remain material caveats."
+  },
   coreView: "Welspun entered FY27 with record quarterly EBITDA and a ₹24,750 crore global order book. The operating result is strong, but reported PAT includes a ₹548 crore exceptional gain and should not be annualised.",
   swot: {
     strengths: ["₹24,750 crore global order book", "Global line-pipe manufacturing footprint", "ROCE above the 20% management guardrail"],

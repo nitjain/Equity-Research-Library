@@ -267,6 +267,16 @@ nav .reports-home {
 .insight-tile.negative b { color: var(--red, #9d3434); }
 .insight-tile.neutral b { color: var(--gold, #9a6a12); }
 
+.valuation-upside {
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.valuation-upside.upside { color: var(--green, #246b45); }
+.valuation-upside.downside { color: var(--red, #9d3434); }
+.valuation-upside.neutral { color: var(--muted); }
+
 .method-note {
   margin: 9px 0 0;
   color: var(--muted);
