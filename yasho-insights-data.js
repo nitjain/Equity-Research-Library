@@ -1,8 +1,8 @@
 window.reportInsightsData = {
   snapshot: {
     marketCap: "₹7,161 Cr",
-    pe: "29.8x",
-    peg: "0.99",
+    pe: "159.1x",
+    peg: "N/M",
     roe: "23.0%",
     roce: "18.0%",
     quarterRating: "Excellent",
