@@ -391,8 +391,6 @@
       "company-dashboard": "Snapshot & Charts",
       "executive-summary": "Summary",
       summary: "Summary",
-      "quarter-snapshot": "Q1 FY27",
-      snapshot: "Quarter Snapshot",
       "swot-analysis": "SWOT Analysis",
       "strategic-positioning": "Strategic Quality",
       "market-context": "Customers & Geography",
