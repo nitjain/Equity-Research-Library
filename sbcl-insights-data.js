@@ -17,6 +17,16 @@ window.reportInsightsData = {
     runRate: [{ label: "Revenue", value: "₹585-640 Cr" }, { label: "Expected OPM", value: "25-27%" }, { label: "Expected EBITDA margin", value: "26-28%" }, { label: "EBITDA", value: "₹152-179 Cr" }, { label: "PAT", value: "₹101-124 Cr" }, { label: "Expected EPS", value: "₹17.5-21.5" }],
     note: "Expected EPS uses approximately 5.76 crore shares. The ranges assume no major customer-program delay."
   },
+  valuation: {
+    model: "Forward P/E on normalized earnings",
+    rationale: "This model fits a high-return precision-materials supplier with sticky qualifications and program-led growth. Approximately 5.76 crore shares are used; the unusually strong Q1 mix is normalized toward sustainable margins, with cash conversion and customer concentration as cross-checks.",
+    years: [
+      { period: "FY27E", scenarios: [{ scenario: "Bear", revenue: "₹550 Cr", patMargin: "16.0%", pat: "₹88 Cr", eps: "₹15.28", multiple: "40x", price: "₹611", remarks: "Program timing and mix normalize below the recent quarter." }, { scenario: "Base", revenue: "₹600 Cr", patMargin: "18.0%", pat: "₹108 Cr", eps: "₹18.75", multiple: "50x", price: "₹938", remarks: "Shunt demand and realizations sustain the expected run rate." }, { scenario: "Bull", revenue: "₹650 Cr", patMargin: "20.0%", pat: "₹130 Cr", eps: "₹22.57", multiple: "60x", price: "₹1,354", remarks: "EV, storage and smart-meter programmes lift premium mix." }] },
+      { period: "FY28E", scenarios: [{ scenario: "Bear", revenue: "₹620 Cr", patMargin: "16.0%", pat: "₹99 Cr", eps: "₹17.19", multiple: "38x", price: "₹653", remarks: "Customer ramps slip and raw-material pass-through weakens." }, { scenario: "Base", revenue: "₹700 Cr", patMargin: "18.5%", pat: "₹130 Cr", eps: "₹22.57", multiple: "48x", price: "₹1,083", remarks: "Designed-in programmes scale with stable normalized margins." }, { scenario: "Bull", revenue: "₹800 Cr", patMargin: "21.0%", pat: "₹168 Cr", eps: "₹29.17", multiple: "58x", price: "₹1,692", remarks: "Forward integration raises content across global programmes." }] },
+      { period: "FY29E", scenarios: [{ scenario: "Bear", revenue: "₹700 Cr", patMargin: "16.0%", pat: "₹112 Cr", eps: "₹19.44", multiple: "36x", price: "₹700", remarks: "Program concentration limits growth and valuation support." }, { scenario: "Base", revenue: "₹820 Cr", patMargin: "19.0%", pat: "₹156 Cr", eps: "₹27.08", multiple: "46x", price: "₹1,246", remarks: "Precision shunts and assemblies compound at healthy returns." }, { scenario: "Bull", revenue: "₹950 Cr", patMargin: "22.0%", pat: "₹209 Cr", eps: "₹36.28", multiple: "56x", price: "₹2,032", remarks: "New applications and export recovery sustain superior margins." }] }
+    ],
+    note: "These are analytical valuation scenarios, not management guidance or price targets. Multiples mature across years. Customer-program concentration, alloy costs, cash conversion and normalization of Q1's rich mix remain material caveats."
+  },
   coreView: "Q1 FY27 combined 13% revenue growth with a 225-basis-point EBITDA-margin expansion. A richer mix and improved realizations demonstrate pricing and product quality, but the small scale makes program concentration important.",
   swot: {
     strengths: ["Specialized metallurgical processes", "High EBITDA margin", "Long design-in and qualification cycles"],

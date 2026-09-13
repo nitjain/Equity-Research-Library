@@ -232,6 +232,21 @@
     return section;
   }
 
+  function enhanceValuation(valuation, main) {
+    let section = main.querySelector("#valuation");
+    if (!section) {
+      section = document.createElement("section");
+      section.id = "valuation";
+      const risks = main.querySelector("#risks");
+      main.insertBefore(section, risks || main.lastElementChild);
+    }
+    const tables = valuation.years.map((year) => {
+      const rows = year.scenarios.map((item) => `<tr><td>${item.scenario}</td><td>${item.revenue}</td><td>${item.patMargin}</td><td>${item.pat}</td><td>${item.eps}</td><td>${item.multiple}</td><td>${item.price}</td><td>${item.remarks}</td></tr>`).join("");
+      return `<h3>${year.period} Scenario Valuation</h3><table><thead><tr><th>Scenario</th><th>${year.period.replace("E", "")} revenue</th><th>PAT margin</th><th>Expected PAT</th><th>Expected EPS</th><th>Assigned P/E</th><th>Projected Stock Price</th><th>Remarks</th></tr></thead><tbody>${rows}</tbody></table>`;
+    }).join("");
+    section.innerHTML = `<h2>Valuation</h2><p><strong>Primary model:</strong> ${valuation.model}. ${valuation.rationale}</p>${tables}<div class="callout warn">${valuation.note}</div>`;
+  }
+
   function enhanceProjection(projection, main) {
     const section = main.querySelector("#projection");
     if (!section) return;
@@ -353,6 +368,7 @@
     main.querySelectorAll("h2").forEach((heading) => {
       if (heading.textContent.trim() === "Executive Summary") heading.textContent = "Summary";
     });
+    if (data.valuation) enhanceValuation(data.valuation, main);
     enhanceRecentNarrative(data, main);
     enhanceSummary(data, main);
     if (data.snapshot && data.mix && data.revenue && data.ownership) main.prepend(createDashboard(data));
