@@ -2,9 +2,9 @@ window.reportInsightsData = {
   currentPrice: 4187.5,
   priceDate: "11 September 2026",
   snapshot: {
-    marketCap: "₹5,049 Cr",
+    marketCap: "₹7,161 Cr",
     pe: "87.5x",
-    peg: "-2.82",
+    peg: "N/M",
     roe: "23.0%",
     roce: "18.0%",
     quarterRating: "Excellent",
