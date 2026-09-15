@@ -227,7 +227,7 @@ window.reportInsightsData = {
             pat: "₹255 Cr",
             eps: "₹149.12",
             multiple: "53x",
-            price: "₹7,902",
+price: "₹7,903",
             remarks: "Customer additions and export momentum drive above-plan growth."
           }
         ]
