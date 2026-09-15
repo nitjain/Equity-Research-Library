@@ -59,9 +59,13 @@
     return `₹${price.toLocaleString("en-IN", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
   }
 
+  function findCurrentPriceMetadata() {
+    return findMetadataValue(["current price:", "reference price:"]);
+  }
+
   function getCurrentPriceValue(data) {
     if (data.currentPrice) return parseDisplayNumber(data.currentPrice);
-    const explicitPrice = findMetadataValue(["current price:", "reference price:"]);
+    const explicitPrice = findCurrentPriceMetadata();
     if (explicitPrice) return parseDisplayNumber(explicitPrice.replace(/\s*\([^)]*\)\s*$/, ""));
     const high = Number(data.technical?.high52?.replace(/[^\d.]/g, ""));
     const position = data.technical?.fromHigh52?.trim() || "";
@@ -76,7 +80,7 @@
 
   function getCurrentPriceDisplay(data) {
     if (data.currentPrice) return data.priceDate ? `${data.currentPrice} (${data.priceDate})` : data.currentPrice;
-    const explicitPrice = findMetadataValue(["current price:", "reference price:"]);
+    const explicitPrice = findCurrentPriceMetadata();
     if (explicitPrice) return explicitPrice;
     const price = getCurrentPriceValue(data);
     return price === null ? "Not available" : formatCurrencyPrice(price);
