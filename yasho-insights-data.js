@@ -1,4 +1,6 @@
 window.reportInsightsData = {
+  currentPrice: "₹4,187.50",
+  priceDate: "11 September 2026",
   snapshot: {
     marketCap: "₹5,049 Cr",
     pe: "87.5x",
@@ -167,32 +169,32 @@ window.reportInsightsData = {
         scenarios: [
           {
             scenario: "Bear",
-            revenue: "₹1,180 Cr",
+            revenue: "₹1,300 Cr",
             patMargin: "10.5%",
-            pat: "₹124 Cr",
-            eps: "₹72.51",
+            pat: "₹137 Cr",
+            eps: "₹80.12",
             multiple: "45x",
-            price: "₹3,263",
+            price: "₹3,605",
             remarks: "Commissioning slippage and softer realization keep earnings below aspiration."
           },
           {
             scenario: "Base",
-            revenue: "₹1,260 Cr",
+            revenue: "₹1,350 Cr",
             patMargin: "12.5%",
-            pat: "₹158 Cr",
-            eps: "₹92.40",
+            pat: "₹169 Cr",
+            eps: "₹98.83",
             multiple: "52x",
-            price: "₹4,805",
+            price: "₹5,139",
             remarks: "Volume growth and stable margins sustain a strong but balanced earnings upgrade."
           },
           {
             scenario: "Bull",
-            revenue: "₹1,360 Cr",
+            revenue: "₹1,390 Cr",
             patMargin: "14.0%",
-            pat: "₹190 Cr",
-            eps: "₹111.11",
+            pat: "₹195 Cr",
+            eps: "₹114.04",
             multiple: "58x",
-            price: "₹6,444",
+            price: "₹6,614",
             remarks: "Fast utilization ramp and richer mix support higher normalized profitability."
           }
         ]
@@ -227,7 +229,7 @@ window.reportInsightsData = {
             pat: "₹255 Cr",
             eps: "₹149.12",
             multiple: "53x",
-            price: "₹7,902",
+            price: "₹7,903",
             remarks: "Customer additions and export momentum drive above-plan growth."
           }
         ]
