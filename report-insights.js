@@ -55,10 +55,8 @@
     return preparedDate ? preparedDate[1] : findMetadataValue(["report month:"]);
   }
 
-  function getCurrentPrice(data) {
-    if (data.currentPrice) {
-      return data.priceDate ? `${data.currentPrice} (${data.priceDate})` : data.currentPrice;
-    }
+  function getCurrentPriceValue(data) {
+    if (data.currentPrice) return data.currentPrice;
     const explicitPrice = findMetadataValue(["current price:", "reference price:"]);
     if (explicitPrice) return explicitPrice;
     const high = Number(data.technical?.high52?.replace(/[^\d.]/g, ""));
@@ -71,6 +69,11 @@
     if (!Number.isFinite(distance)) return "Not available";
     const price = high * (1 - distance / 100);
     return `₹${price.toLocaleString("en-IN", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+  }
+
+  function getCurrentPrice(data) {
+    const price = getCurrentPriceValue(data);
+    return data.currentPrice && data.priceDate ? `${price} (${data.priceDate})` : price;
   }
 
   function normalizeMetadata(data) {
@@ -448,7 +451,7 @@
     main.querySelectorAll("h2").forEach((heading) => {
       if (heading.textContent.trim() === "Executive Summary") heading.textContent = "Summary";
     });
-    if (data.valuation) enhanceValuation(data.valuation, main, getCurrentPrice(data));
+    if (data.valuation) enhanceValuation(data.valuation, main, getCurrentPriceValue(data));
     enhanceRecentNarrative(data, main);
     enhanceSummary(data, main);
     if (data.snapshot && data.mix && data.revenue && data.ownership) main.prepend(createDashboard(data));
