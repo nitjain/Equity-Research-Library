@@ -1,4 +1,6 @@
 window.reportInsightsData = {
+  currentPrice: 4187.5,
+  priceDate: "11 September 2026",
   snapshot: {
     marketCap: "₹5,049 Cr",
     pe: "87.5x",
@@ -167,32 +169,32 @@ window.reportInsightsData = {
         scenarios: [
           {
             scenario: "Bear",
-            revenue: "₹1,180 Cr",
+            revenue: "₹1,300 Cr",
             patMargin: "10.5%",
-            pat: "₹124 Cr",
-            eps: "₹72.51",
+            pat: "₹137 Cr",
+            eps: "₹80.12",
             multiple: "45x",
-            price: "₹3,263",
+            price: "₹3,605",
             remarks: "Commissioning slippage and softer realization keep earnings below aspiration."
           },
           {
             scenario: "Base",
-            revenue: "₹1,260 Cr",
+            revenue: "₹1,350 Cr",
             patMargin: "12.5%",
-            pat: "₹158 Cr",
-            eps: "₹92.40",
+            pat: "₹169 Cr",
+            eps: "₹98.83",
             multiple: "52x",
-            price: "₹4,805",
+            price: "₹5,139",
             remarks: "Volume growth and stable margins sustain a strong but balanced earnings upgrade."
           },
           {
             scenario: "Bull",
-            revenue: "₹1,360 Cr",
+            revenue: "₹1,390 Cr",
             patMargin: "14.0%",
-            pat: "₹190 Cr",
-            eps: "₹111.11",
+            pat: "₹195 Cr",
+            eps: "₹114.04",
             multiple: "58x",
-            price: "₹6,444",
+            price: "₹6,614",
             remarks: "Fast utilization ramp and richer mix support higher normalized profitability."
           }
         ]
@@ -227,7 +229,7 @@ window.reportInsightsData = {
             pat: "₹255 Cr",
             eps: "₹149.12",
             multiple: "53x",
-            price: "₹7,902",
+            price: "₹7,903",
             remarks: "Customer additions and export momentum drive above-plan growth."
           }
         ]
@@ -242,7 +244,7 @@ window.reportInsightsData = {
             pat: "₹173 Cr",
             eps: "₹101.17",
             multiple: "36x",
-            price: "₹3,643",
+            price: "₹3,642",
             remarks: "Cycle normalization limits rerating despite larger asset base."
           },
           {
@@ -268,6 +270,11 @@ window.reportInsightsData = {
         ]
       }
     ],
+    secondaryCheck: {
+      model: "FY28E EV/EBITDA cross-check",
+      assumptions: "The Base case uses ₹1,500 crore revenue, a 23% EBITDA margin (₹345 crore EBITDA), 25x EV/EBITDA, and net debt of about ₹300 crore. This implies equity value of about ₹8,325 crore, or roughly ₹4,868 per share on 1.71 crore diluted shares.",
+      conclusion: "The implied value is below the FY28E Base P/E outcome of ₹5,579, providing a more conservative cyclicality and capital-structure check."
+    },
     note: "These are analytical scenarios, not management guidance or price targets. Multiples are staged to mature across forecast years, while capex execution, working-capital intensity and raw-material spreads remain key valuation sensitivities."
   },
   coreView: "Yasho delivered a strong Q1 FY27 with revenue up to ₹307.74 crore, EBITDA margin at 24.2% and PAT at ₹36.05 crore, while capex guidance was stepped up to ₹250 crore. The setup supports growth, but the investment case now depends on timely capacity commissioning and cash conversion.",
@@ -309,7 +316,7 @@ window.reportInsightsData = {
   },
   marketContext: {
     customers: {
-      names: ["Global industrial customers", "Specialty-chemicals buyers", "Consumer-chemical clients"],
+      names: [],
       text: "The company commentary confirms broad customer expansion, but detailed customer-level concentration disclosures are limited in public summary documents."
     },
     geography: {
