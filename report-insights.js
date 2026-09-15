@@ -55,25 +55,31 @@
     return preparedDate ? preparedDate[1] : findMetadataValue(["report month:"]);
   }
 
-  function getCurrentPriceWithoutDate(data) {
-    if (data.currentPrice) return data.currentPrice;
-    const explicitPrice = findMetadataValue(["current price:", "reference price:"]);
-    if (explicitPrice) return explicitPrice;
-    const high = Number(data.technical?.high52?.replace(/[^\d.]/g, ""));
-    const position = data.technical?.fromHigh52?.trim() || "";
-    if (!Number.isFinite(high)) return "Not available";
-    if (/^(?:at|near) 52-week high$/i.test(position)) {
-      return `₹${high.toLocaleString("en-IN", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
-    }
-    const distance = Number(position.match(/^([\d.]+)% below/i)?.[1]);
-    if (!Number.isFinite(distance)) return "Not available";
-    const price = high * (1 - distance / 100);
+  function formatCurrencyPrice(price) {
     return `₹${price.toLocaleString("en-IN", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
   }
 
-  function getCurrentPrice(data) {
-    const price = getCurrentPriceWithoutDate(data);
-    return data.currentPrice && data.priceDate ? `${price} (${data.priceDate})` : price;
+  function getCurrentPriceValue(data) {
+    if (data.currentPrice) return parseDisplayNumber(data.currentPrice);
+    const explicitPrice = findMetadataValue(["current price:", "reference price:"]);
+    if (explicitPrice) return parseDisplayNumber(explicitPrice.replace(/\s*\([^)]*\)\s*$/, ""));
+    const high = Number(data.technical?.high52?.replace(/[^\d.]/g, ""));
+    const position = data.technical?.fromHigh52?.trim() || "";
+    if (!Number.isFinite(high)) return null;
+    if (/^(?:at|near) 52-week high$/i.test(position)) {
+      return high;
+    }
+    const distance = Number(position.match(/^([\d.]+)% below/i)?.[1]);
+    if (!Number.isFinite(distance)) return null;
+    return high * (1 - distance / 100);
+  }
+
+  function getCurrentPriceDisplay(data) {
+    if (data.currentPrice) return data.priceDate ? `${data.currentPrice} (${data.priceDate})` : data.currentPrice;
+    const explicitPrice = findMetadataValue(["current price:", "reference price:"]);
+    if (explicitPrice) return explicitPrice;
+    const price = getCurrentPriceValue(data);
+    return price === null ? "Not available" : formatCurrencyPrice(price);
   }
 
   function normalizeMetadata(data) {
@@ -83,7 +89,7 @@
     metadata.replaceChildren(...[
       ["Company", getCompanyName()],
       ["Report Date", getReportDate()],
-      ["Current Price", getCurrentPrice(data)]
+      ["Current Price", getCurrentPriceDisplay(data)]
     ].map(([label, value]) => {
       const pill = document.createElement("span");
       pill.className = "pill";
@@ -451,7 +457,7 @@
     main.querySelectorAll("h2").forEach((heading) => {
       if (heading.textContent.trim() === "Executive Summary") heading.textContent = "Summary";
     });
-    if (data.valuation) enhanceValuation(data.valuation, main, getCurrentPriceWithoutDate(data));
+    if (data.valuation) enhanceValuation(data.valuation, main, getCurrentPriceValue(data));
     enhanceRecentNarrative(data, main);
     enhanceSummary(data, main);
     if (data.snapshot && data.mix && data.revenue && data.ownership) main.prepend(createDashboard(data));
