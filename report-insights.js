@@ -3,6 +3,7 @@
 
   const COLORS = ["#176d6a", "#d19a32", "#7a6da8", "#8aa29e"];
   const GEOGRAPHY_COLORS = ["#0d6662", "#56a89d", "#96c9c2", "#d19a32", "#7a6da8", "#aab8b5"];
+  const NOT_DISCLOSED = "Not disclosed";
 
   function prioritizeSharedStyles() {
     const stylesheet = document.querySelector('link[href^="report-insights.css"]');
@@ -101,7 +102,8 @@
   }
 
   function metric(label, value, note = "", tone = "") {
-    return `<div class="insight-tile ${tone}"><span>${label}</span><b>${value}</b>${note ? `<small>${note}</small>` : ""}</div>`;
+    const displayValue = value === undefined || value === null || value === "" ? NOT_DISCLOSED : value;
+    return `<div class="insight-tile ${tone}"><span>${label}</span><b>${displayValue}</b>${note ? `<small>${note}</small>` : ""}</div>`;
   }
 
   function legend(labels) {
@@ -139,6 +141,9 @@
   }
 
   function ownershipChart(chart) {
+    if (!chart.periods?.length || !chart.labels?.length || !chart.values?.length) {
+      return `<div class="compact-chart"><div class="chart-title">Shareholding pattern</div><div class="geography-unavailable">${NOT_DISCLOSED}</div><p class="chart-note">${chart.note || "Shareholding snapshots were not available in the cited sources."}</p></div>`;
+    }
     const rows = chart.periods.map((period, rowIndex) => {
       const description = chart.values[rowIndex].map((value, index) => `${chart.labels[index]} ${value}%`).join(", ");
       const segments = chart.values[rowIndex].map((value, index) => `<i aria-hidden="true" style="width:${value}%;background:${COLORS[index]}" title="${chart.labels[index]} ${value}%"></i>`).join("");
@@ -218,15 +223,17 @@
   function createQuarterStrengthSection(analysis) {
     const section = document.createElement("section");
     section.id = "strong-quarter";
-    section.innerHTML = `<h2>Why The Previous Quarter Was Strong</h2><ul>${analysis.items.map((item) => `<li><strong>${item.title}:</strong> ${item.text}</li>`).join("")}</ul>${analysis.callout ? `<div class="callout">${analysis.callout}</div>` : ""}`;
+    const heading = analysis.heading || "Why The Previous Quarter Was Strong";
+    section.innerHTML = `<h2>${heading}</h2><ul>${analysis.items.map((item) => `<li><strong>${item.title}:</strong> ${item.text}</li>`).join("")}</ul>${analysis.callout ? `<div class="callout">${analysis.callout}</div>` : ""}`;
     return section;
   }
 
   function createEarningsDriversSection(analysis) {
     const section = document.createElement("section");
     section.id = "earnings-drivers";
+    const heading = analysis.heading || "Why Earnings Improved";
     const driverList = (items) => `<ul>${items.map((item) => `<li>${item}</li>`).join("")}</ul>`;
-    section.innerHTML = `<h2>Why Earnings Improved</h2><div class="two"><div class="panel"><h3>Structural Drivers</h3>${driverList(analysis.structural)}</div><div class="panel"><h3>Quarter-Specific Drivers</h3>${driverList(analysis.quarterSpecific)}</div></div><p>${analysis.conclusion}</p>`;
+    section.innerHTML = `<h2>${heading}</h2><div class="two"><div class="panel"><h3>Structural Drivers</h3>${driverList(analysis.structural)}</div><div class="panel"><h3>Quarter-Specific Drivers</h3>${driverList(analysis.quarterSpecific)}</div></div><p>${analysis.conclusion}</p>`;
     return section;
   }
 
@@ -324,9 +331,28 @@
     section.id = "technical-analysis";
     section.className = "insights-compact";
     const chartId = `price-fill-${document.title.replace(/\W/g, "").slice(0, 12)}`;
-    const transformedPoints = technical.points.split(" ").map((point) => {
+    const points = String(technical.points || "").split(/\s+/).map((point) => {
       const [x, y] = point.split(",").map(Number);
-      return `${45 + x * 1.7},${18 + ((y - 10) / 70) * 180}`;
+      return Number.isFinite(x) && Number.isFinite(y) ? { x, y } : null;
+    }).filter(Boolean);
+    const hasPriceSeries = technical.seriesAvailable !== false
+      && points.length >= 2
+      && !/indicative approximation/i.test(technical.read || "");
+    const stats = `<div class="technical-stats">${metric("1 month", technical.oneMonth, "Price return", signedTone(technical.oneMonth || ""))}${metric("3 months", technical.threeMonth, "Price return", signedTone(technical.threeMonth || ""))}${metric("1 year", technical.oneYear, "Price return", signedTone(technical.oneYear || ""))}${metric("52-week high", technical.high52, technical.fromHigh52)}${metric("All-time high", technical.ath, technical.fromAth)}${metric("RSI (14)", technical.rsi, technical.rsiLabel, technical.rsiTone)}${metric("20 / 50 DMA", technical.dmaShort, technical.trend)}${metric("200 DMA", technical.dma200, technical.priceVs200)}</div>`;
+    if (!hasPriceSeries) {
+      section.innerHTML = `<h2>Technical Analysis</h2><div class="technical-grid"><figure class="technical-chart market-price-chart"><div class="chart-toolbar"><div><b>Adjusted close</b><span>1Y · Weekly samples</span></div><span class="chart-status">Not available</span></div><div class="technical-empty" role="img" aria-label="Adjusted close price series not disclosed">Price series not disclosed</div><figcaption class="technical-caption"><span>Price scale · ₹</span><span>Historical series unavailable</span></figcaption></figure>${stats}</div><div class="callout ${technical.calloutTone}"><strong>Technical read:</strong> ${technical.read || NOT_DISCLOSED}</div><p class="method-note">Technical indicators are shown only when a cited historical price series is available. Unavailable values are not inferred.</p>`;
+      return section;
+    }
+    const xValues = points.map((point) => point.x);
+    const yValues = points.map((point) => point.y);
+    const xMin = Math.min(...xValues);
+    const xRange = Math.max(...xValues) - xMin || 1;
+    const yMin = Math.min(...yValues);
+    const yRange = Math.max(...yValues) - yMin || 1;
+    const transformedPoints = points.map(({ x, y }) => {
+      const plotX = 45 + ((x - xMin) / xRange) * 510;
+      const plotY = 18 + ((y - yMin) / yRange) * 180;
+      return `${plotX},${plotY}`;
     }).join(" ");
     const lastPoint = transformedPoints.split(" ").at(-1).split(",");
     const areaPoints = `45,198 ${transformedPoints} 555,198`;
@@ -334,7 +360,7 @@
     const horizontalGrid = [18, 63, 108, 153, 198].map((y) => `<line x1="45" y1="${y}" x2="555" y2="${y}"/>`).join("");
     const dates = ["Sep ’25", "Dec ’25", "Mar ’26", "Jun ’26", "Sep ’26"];
     const dateLabels = dates.map((label, index) => `<text x="${[45, 172.5, 300, 427.5, 555][index]}" y="224" text-anchor="${index === 0 ? "start" : index === 4 ? "end" : "middle"}">${label}</text>`).join("");
-    section.innerHTML = `<h2>Technical Analysis</h2><div class="technical-grid"><figure class="technical-chart market-price-chart"><div class="chart-toolbar"><div><b>Adjusted close</b><span>1Y · Weekly samples</span></div><span class="chart-status">Market trend</span></div><svg viewBox="0 0 600 240" role="img" aria-label="One-year adjusted stock-price trend from September 2025 to September 2026"><defs><linearGradient id="${chartId}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0d6662" stop-opacity=".24"/><stop offset="1" stop-color="#0d6662" stop-opacity=".01"/></linearGradient></defs><g class="chart-gridlines">${verticalGrid}${horizontalGrid}</g><polyline class="price-area" points="${areaPoints}" fill="url(#${chartId})"/><polyline class="price-line" points="${transformedPoints}"/><circle class="last-price-dot" cx="${lastPoint[0]}" cy="${lastPoint[1]}" r="4"/><g class="chart-axis-labels">${dateLabels}<text x="45" y="13">High ₹${technical.chartHigh}</text><text x="555" y="213" text-anchor="end">Low ₹${technical.chartLow}</text></g></svg><figcaption class="technical-caption"><span>Approximate time axis</span><span>Through 11 Sep 2026</span></figcaption></figure><div class="technical-stats">${metric("1 month", technical.oneMonth, "Price return", signedTone(technical.oneMonth))}${metric("3 months", technical.threeMonth, "Price return", signedTone(technical.threeMonth))}${metric("1 year", technical.oneYear, "Price return", signedTone(technical.oneYear))}${metric("52-week high", technical.high52, technical.fromHigh52)}${metric("All-time high", technical.ath, technical.fromAth)}${metric("RSI (14)", technical.rsi, technical.rsiLabel, technical.rsiTone)}${metric("20 / 50 DMA", technical.dmaShort, technical.trend)}${metric("200 DMA", technical.dma200, technical.priceVs200)}</div></div><div class="callout ${technical.calloutTone}"><strong>Technical read:</strong> ${technical.read}</div><p class="method-note">Technical returns, adjusted-price highs, moving averages and RSI use Yahoo Finance daily data through 11 September 2026 or the nearest available session. Month labels are approximate because the stored sampled series does not include observation dates. ATH means the available Yahoo series. PEAD is price confirmation, not proof of earnings causality.</p>`;
+    section.innerHTML = `<h2>Technical Analysis</h2><div class="technical-grid"><figure class="technical-chart market-price-chart"><div class="chart-toolbar"><div><b>Adjusted close</b><span>1Y · Weekly samples</span></div><span class="chart-status">Market trend</span></div><svg viewBox="0 0 600 240" role="img" aria-label="One-year adjusted stock-price trend from September 2025 to September 2026"><defs><linearGradient id="${chartId}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0d6662" stop-opacity=".24"/><stop offset="1" stop-color="#0d6662" stop-opacity=".01"/></linearGradient></defs><g class="chart-gridlines">${verticalGrid}${horizontalGrid}</g><polygon class="price-area" points="${areaPoints}" fill="url(#${chartId})"/><polyline class="price-line" points="${transformedPoints}"/><circle class="last-price-dot" cx="${lastPoint[0]}" cy="${lastPoint[1]}" r="4"/><g class="chart-axis-labels">${dateLabels}<text x="45" y="13">High ₹${technical.chartHigh}</text><text x="555" y="213" text-anchor="end">Low ₹${technical.chartLow}</text></g></svg><figcaption class="technical-caption"><span>Price scale · ₹</span><span>Through 11 Sep 2026</span></figcaption></figure>${stats}</div><div class="callout ${technical.calloutTone}"><strong>Technical read:</strong> ${technical.read || NOT_DISCLOSED}</div><p class="method-note">Technical returns, adjusted-price highs, moving averages and RSI use the cited Yahoo Finance daily data through 11 September 2026 or the nearest available session. Month labels are approximate because the stored sampled series does not include observation dates. ATH means the available Yahoo series. PEAD is price confirmation, not proof of earnings causality.</p>`;
     const priceHigh = Number(technical.chartHigh.replace(/,/g, ""));
     const priceLow = Number(technical.chartLow.replace(/,/g, ""));
     const priceScale = [18, 63, 108, 153, 198].map((y, index) => {
@@ -345,7 +371,6 @@
     [...axisLabels.querySelectorAll("text")].slice(-2).forEach((label) => label.remove());
     axisLabels.insertAdjacentHTML("afterbegin", priceScale);
     section.querySelector("svg").setAttribute("aria-label", "One-year adjusted stock-price trend with rupee price scale");
-    section.querySelector(".technical-caption span").textContent = "Price scale · ₹";
     return section;
   }
 
@@ -366,8 +391,6 @@
       "company-dashboard": "Snapshot & Charts",
       "executive-summary": "Summary",
       summary: "Summary",
-      "quarter-snapshot": "Q1 FY27",
-      snapshot: "Quarter Snapshot",
       "swot-analysis": "SWOT Analysis",
       "strategic-positioning": "Strategic Quality",
       "market-context": "Customers & Geography",
