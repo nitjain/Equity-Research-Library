@@ -56,6 +56,9 @@
   }
 
   function getCurrentPrice(data) {
+    if (data.currentPrice) {
+      return data.priceDate ? `${data.currentPrice} (${data.priceDate})` : data.currentPrice;
+    }
     const explicitPrice = findMetadataValue(["current price:", "reference price:"]);
     if (explicitPrice) return explicitPrice;
     const high = Number(data.technical?.high52?.replace(/[^\d.]/g, ""));
