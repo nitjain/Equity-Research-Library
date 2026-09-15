@@ -1,8 +1,10 @@
 window.reportInsightsData = {
+  currentPrice: 4187.5,
+  priceDate: "11 September 2026",
   snapshot: {
-    marketCap: "₹5,049 Cr",
+    marketCap: "₹7,161 Cr",
     pe: "87.5x",
-    peg: "-2.82",
+    peg: "N/M",
     roe: "23.0%",
     roce: "18.0%",
     quarterRating: "Excellent",
@@ -242,7 +244,7 @@ window.reportInsightsData = {
             pat: "₹173 Cr",
             eps: "₹101.17",
             multiple: "36x",
-            price: "₹3,643",
+            price: "₹3,642",
             remarks: "Cycle normalization limits rerating despite larger asset base."
           },
           {
@@ -268,6 +270,11 @@ window.reportInsightsData = {
         ]
       }
     ],
+    secondaryCheck: {
+      model: "FY28E EV/EBITDA cross-check",
+      assumptions: "The Base case uses ₹1,500 crore revenue, a 23% EBITDA margin (₹345 crore EBITDA), 25x EV/EBITDA, and net debt of about ₹300 crore. This implies equity value of about ₹8,325 crore, or roughly ₹4,868 per share on 1.71 crore diluted shares.",
+      conclusion: "The implied value is below the FY28E Base P/E outcome of ₹5,579, providing a more conservative cyclicality and capital-structure check."
+    },
     note: "These are analytical scenarios, not management guidance or price targets. Multiples are staged to mature across forecast years, while capex execution, working-capital intensity and raw-material spreads remain key valuation sensitivities."
   },
   coreView: "Yasho delivered a strong Q1 FY27 with revenue up to ₹307.74 crore, EBITDA margin at 24.2% and PAT at ₹36.05 crore, while capex guidance was stepped up to ₹250 crore. The setup supports growth, but the investment case now depends on timely capacity commissioning and cash conversion.",
@@ -309,7 +316,7 @@ window.reportInsightsData = {
   },
   marketContext: {
     customers: {
-      names: ["Global industrial customers", "Specialty-chemicals buyers", "Consumer-chemical clients"],
+      names: [],
       text: "The company commentary confirms broad customer expansion, but detailed customer-level concentration disclosures are limited in public summary documents."
     },
     geography: {

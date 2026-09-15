@@ -56,6 +56,10 @@
   }
 
   function getCurrentPrice(data) {
+    if (Number.isFinite(data.currentPrice)) {
+      const price = `₹${data.currentPrice.toLocaleString("en-IN", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+      return data.priceDate ? `${price} (${data.priceDate})` : price;
+    }
     const explicitPrice = findMetadataValue(["current price:", "reference price:"]);
     if (explicitPrice) return explicitPrice;
     const high = Number(data.technical?.high52?.replace(/[^\d.]/g, ""));
@@ -275,7 +279,8 @@
       const rows = year.scenarios.map((item) => `<tr><td>${item.scenario}</td><td>${item.revenue}</td><td>${item.patMargin}</td><td>${item.pat}</td><td>${item.eps}</td><td>${item.multiple}</td><td>${item.price}</td><td>${formatPotentialUpside(item.price, currentPrice)}</td><td>${item.remarks}</td></tr>`).join("");
       return `<h3>${year.period} Scenario Valuation</h3><table><thead><tr><th>Scenario</th><th>${year.period.replace("E", "")} revenue</th><th>PAT margin</th><th>Expected PAT</th><th>Expected EPS</th><th>Assigned P/E</th><th>Projected Stock Price</th><th>Potential upside %</th><th>Remarks</th></tr></thead><tbody>${rows}</tbody></table>`;
     }).join("");
-    section.innerHTML = `<h2>Valuation</h2><p><strong>Primary model:</strong> ${valuation.model}. ${valuation.rationale}</p>${tables}<div class="callout warn">${valuation.note}</div>`;
+    const secondaryCheck = valuation.secondaryCheck ? `<p><strong>Secondary check:</strong> ${valuation.secondaryCheck.model}. ${valuation.secondaryCheck.assumptions} ${valuation.secondaryCheck.conclusion}</p>` : "";
+    section.innerHTML = `<h2>Valuation</h2><p><strong>Primary model:</strong> ${valuation.model}. ${valuation.rationale}</p>${tables}${secondaryCheck}<div class="callout warn">${valuation.note}</div>`;
   }
 
   function enhanceProjection(projection, main) {
@@ -445,7 +450,7 @@
     main.querySelectorAll("h2").forEach((heading) => {
       if (heading.textContent.trim() === "Executive Summary") heading.textContent = "Summary";
     });
-    if (data.valuation) enhanceValuation(data.valuation, main, getCurrentPrice(data));
+    if (data.valuation) enhanceValuation(data.valuation, main, data.currentPrice ?? getCurrentPrice(data));
     enhanceRecentNarrative(data, main);
     enhanceSummary(data, main);
     if (data.snapshot && data.mix && data.revenue && data.ownership) main.prepend(createDashboard(data));
